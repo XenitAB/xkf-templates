@@ -1,0 +1,47 @@
+name: $(Build.BuildId)
+
+variables:
+  - name: azureSubscriptionTemplate
+    value: "xks-{0}-owner"
+  - name: terraformFolder
+    value: "aks"
+  - name: sourceBranch
+    value: "refs/heads/main"
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - aks
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: XKS/azure-devops-templates
+      ref: refs/tags/2022.10.2
+
+stages:
+  - template: terraform-docker/plan/main.yaml@templates
+    parameters:
+      azureSubscriptionTemplate: ${{ variables.azureSubscriptionTemplate }}
+      poolNameTemplate: "xks-vmss"
+      terraformFolder: ${{ variables.terraformFolder }}
+      sourceBranch: ${{ variables.sourceBranch }}
+      environments:
+        - name: dev
+        - name: qa
+        - name: prod
+  - template: terraform-docker/apply/main.yaml@templates
+    parameters:
+      azureSubscriptionTemplate: ${{ variables.azureSubscriptionTemplate }}
+      poolNameTemplate: "xks-vmss"
+      terraformFolder: ${{ variables.terraformFolder }}
+      sourceBranch: ${{ variables.sourceBranch }}
+      environments:
+        - name: dev
+        - name: qa
+        - name: prod
