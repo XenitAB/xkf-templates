@@ -1,4 +1,8 @@
 # tflint-ignore: terraform_unused_declarations
+variable "tenant_id" {
+  description = "The id of the tenant"
+  type        = string
+}
 variable "location" {
   description = "The name of the location"
   type        = string
@@ -10,22 +14,12 @@ variable "location_short" {
 }
 
 variable "environment" {
-  description = "The environment name to use for the deploy"
-  type        = string
-}
-
-variable "name" {
-  description = "The name to use for the deploy"
+  description = "The environment name"
   type        = string
 }
 
 variable "subscription_name" {
   description = "The commonName for the subscription"
-  type        = string
-}
-
-variable "core_name" {
-  description = "The name for the core infrastructure"
   type        = string
 }
 
@@ -35,7 +29,7 @@ variable "unique_suffix" {
 }
 
 variable "azure_ad_group_prefix" {
-  description = "Prefix for Azure AD Groupss"
+  description = "Prefix for Azure AD Groups"
   type        = string
 }
 
@@ -44,8 +38,8 @@ variable "aks_group_name_prefix" {
   type        = string
 }
 
-variable "namespaces" {
-  description = "Tenant kubernetes namespaces."
+variable "tenant_namespaces" {
+  description = "Tenant kubernetes namespaces"
   type = list(
     object({
       name                    = string
@@ -68,7 +62,7 @@ variable "namespaces" {
 }
 
 variable "dns_zones" {
-  description = "The DNS Zone to create"
+  description = "The DNS Zones"
   type        = list(string)
 }
 
@@ -94,21 +88,4 @@ variable "aks_config" {
       node_labels    = map(string)
     }))
   })
-  default = {
-    node_pools = [{
-      max_count = 1
-      min_count = 1
-      name      = "value"
-      node_labels = {
-        "key" = "value"
-      }
-      node_taints    = ["value"]
-      spot_enabled   = false
-      spot_max_price = 1
-      version        = "value"
-      vm_size        = "value"
-    }]
-    production_grade = false
-    version          = "value"
-  }
 }
