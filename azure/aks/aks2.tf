@@ -37,7 +37,7 @@ module "aks2" {
 
   aks_config                    = var.aks_config
   aks_public_ip_prefix_id       = module.aks_regional.aks_public_ip_prefix_ids[1]
-  aks_authorized_ips            = local.aks_authorized_ips
+  aks_authorized_ips            = var.aks_authorized_ips
   ssh_public_key                = module.aks_regional.ssh_public_key
   aks_managed_identity_group_id = module.aks_regional.aks_managed_identity_group_id
   aad_groups                    = module.xkf_governance_global_data.aad_groups
@@ -69,7 +69,7 @@ module "aks2_core" {
   name                                   = local.name
   aks_name_suffix                        = 2
   global_location_short                  = var.location_short
-  kubernetes_network_policy_default_deny = false
+  kubernetes_network_policy_default_deny = var.kubernetes_network_policy_default_deny
 
   aad_groups = module.xkf_governance_global_data.aad_groups
   namespaces = [for n in var.tenant_namespaces :
@@ -94,9 +94,11 @@ module "aks2_core" {
   azad_kube_proxy_config = {
     fqdn                  = "aks-${var.location_short}.${var.dns_zones[0]}"
     azure_ad_group_prefix = var.aks_group_name_prefix
-    allowed_ips           = local.aks_authorized_ips
+    allowed_ips           = var.aks_authorized_ips
     azure_ad_app          = module.aks_regional.azad_kube_proxy.azure_ad_app
   }
+
+  ingress_config = var.ingress_config
 
   starboard_enabled = true
   starboard_config  = module.aks_regional.trivy_identity
@@ -106,12 +108,12 @@ module "aks2_core" {
   prometheus_enabled = true
   prometheus_config = {
     tenant_id                       = var.tenant_id
-    remote_write_authenticated      = true
-    remote_write_url                = "https://metrics.prod.unbox.xenit.io/api/v1/receive"
+    remote_write_authenticated      = var.prometheus_config.remote_write_authenticated
+    remote_write_url                = var.prometheus_config.remote_write_url
     volume_claim_storage_class_name = "managed-csi-zrs"
-    volume_claim_size               = "5Gi"
-    resource_selector               = ["platform"]
-    namespace_selector              = ["platform"]
+    volume_claim_size               = var.prometheus_config.volume_claim_size
+    resource_selector               = var.prometheus_config.resource_selector
+    namespace_selector              = var.prometheus_config.namespace_selector
     azure_key_vault_name            = module.aks_regional.xenit.azure_key_vault_name
     identity                        = module.aks_regional.xenit.identity
   }
@@ -121,17 +123,23 @@ module "aks2_core" {
     loki_address         = "https://logging.prod.unbox.xenit.io/loki/api/v1/push"
     azure_key_vault_name = module.aks_regional.xenit.azure_key_vault_name
     identity             = module.aks_regional.xenit.identity
-    excluded_namespaces  = var.tenant_namespaces[*].name
+    excluded_namespaces  = setsubtract(var.tenant_namespaces[*].name, var.promtail_included_tenant_namespaces)
   }
 
-  opa_gatekeeper_config = {
-    additional_excluded_namespaces = ["prometheus"]
-    enable_default_constraints     = true
-    additional_constraints         = []
-    enable_default_assigns         = true
-    additional_assigns             = []
+  opa_gatekeeper_config = var.opa_gatekeeper_config
+
+  grafana_agent_enabled = local.grafana_agent_enabled
+  grafana_agent_config  = local.grafana_agent_config
+  datadog_enabled       = local.datadog_enabled
+  datadog_config        = local.datadog_config
+
+  control_plane_logs_enabled = var.control_plane_logs_enabled
+  control_plane_logs_config = {
+    azure_key_vault_name = module.aks_regional.xenit.azure_key_vault_name
+    identity             = module.aks_regional.xenit.identity
+    eventhub_hostname    = module.aks_regional.log_eventhub_hostname
+    eventhub_name        = module.aks_regional.log_eventhub_name
   }
 
-  grafana_agent_config = local.grafana_agent_config
-  datadog_config       = local.datadog_config
+  node_ttl_enabled = var.node_ttl_enabled
 }

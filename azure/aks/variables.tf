@@ -89,3 +89,87 @@ variable "aks_config" {
     }))
   })
 }
+
+
+variable "opa_gatekeeper_config" {
+  description = "Configuration for OPA Gatekeeper"
+  type = object({
+    additional_excluded_namespaces = list(string)
+    enable_default_constraints     = bool
+    additional_constraints = list(object({
+      excluded_namespaces = list(string)
+      processes           = list(string)
+    }))
+    enable_default_assigns = bool
+    additional_assigns = list(object({
+      name = string
+    }))
+  })
+  default = {
+    additional_excluded_namespaces = ["prometheus"]
+    enable_default_constraints     = true
+    additional_constraints         = []
+    enable_default_assigns         = true
+    additional_assigns             = []
+  }
+}
+
+variable "ingress_config" {
+  description = "Ingress configuration"
+  type = object({
+    http_snippet              = string
+    public_private_enabled    = bool
+    allow_snippet_annotations = bool
+    extra_config              = map(string)
+    extra_headers             = map(string)
+  })
+  default = {
+    http_snippet              = ""
+    public_private_enabled    = false
+    allow_snippet_annotations = false
+    extra_config              = {}
+    extra_headers             = {}
+  }
+}
+
+variable "prometheus_config" {
+  description = "Configuration for prometheus"
+  type = object({
+    remote_write_authenticated = bool
+    remote_write_url           = string
+    volume_claim_size          = string
+    resource_selector          = list(string)
+    namespace_selector         = list(string)
+  })
+  default = {
+    namespace_selector         = ["platform"]
+    remote_write_authenticated = true
+    remote_write_url           = "https://metrics.prod.unbox.xenit.io/api/v1/receive"
+    resource_selector          = ["platform"]
+    volume_claim_size          = "5Gi"
+  }
+}
+
+variable "node_ttl_enabled" {
+  description = "Should Node TTL be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "control_plane_logs_enabled" {
+  description = "Should Control plan be enabled"
+  type        = bool
+  default     = false
+}
+
+variable "kubernetes_network_policy_default_deny" {
+  description = "If network policies should by default deny cross namespace traffic"
+  type        = bool
+  default     = true
+}
+
+variable "promtail_included_tenant_namespaces" {
+  description = "If network policies should by default deny cross namespace traffic"
+  type        = list(string)
+  default     = []
+}

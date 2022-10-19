@@ -58,13 +58,6 @@ provider "tls" {}
 provider "flux" {}
 
 locals {
-  aks_authorized_ips = concat([
-    "20.50.34.176/32",  # Xenit Azure (CVAD)
-    "51.138.51.65/32",  # Xenit Azure (VPN)
-    "212.116.69.18/32", # Xenit GBG Office (GBG Primary)
-    "212.116.69.27/32", # Xenit GBG Office (Secondary / VPN)
-    "193.14.162.82/32", # Xenit GBG Office (4G)
-  ], var.aks_authorized_ips)
   name      = "aks"
   core_name = "core"
 }
@@ -99,7 +92,7 @@ module "aks_regional" {
     }
   ]
   dns_zone              = var.dns_zones
-  aks_authorized_ips    = local.aks_authorized_ips
+  aks_authorized_ips    = var.aks_authorized_ips
   azure_ad_group_prefix = var.azure_ad_group_prefix
   aks_managed_identity  = module.xkf_governance_global_data.aad_groups.aks_managed_identity.id
 }

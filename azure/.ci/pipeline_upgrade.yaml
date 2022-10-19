@@ -1,0 +1,102 @@
+trigger: none
+
+schedules:
+  - cron: "0 * * * *"
+    displayName: Hourly Check
+    branches:
+      include:
+        - main
+    always: true
+
+pool:
+  vmImage: "ubuntu-22.04"
+
+steps:
+  - checkout: self
+    clean: true
+    fetchDepth: 0
+    persistCredentials: true
+  - bash: |
+      set -e
+      git clone https://github.com/XenitAB/xkf-templates.git
+      cd xkf-templates
+      LATEST_TAG=$(git describe --abbrev=0 --tags)
+      echo "Latest template tag: $LATEST_TAG"
+      echo "##vso[task.setvariable variable=templateVersion]$LATEST_TAG"
+    displayName: Fetch template
+  - bash: |
+      set -e
+      echo "Checking version: $(templateVersion)"
+      VERSION_FILE="$(Build.SourcesDirectory)/template.version"
+
+      if [ -f "$VERSION_FILE" ]; then
+          echo "$VERSION_FILE exists."
+          CURRENT_VERSION=$(cat "$VERSION_FILE")
+          if [ "$CURRENT_VERSION" == "$templateVersion" ]; then
+              echo "Template version $templateVersion already applied"
+              exit 0
+          fi 
+      fi
+      echo "##vso[task.setvariable variable=updateCheckOk]Yes"
+    displayName: Check update
+  - bash: |
+      set -e
+      TEMPLATE_VERSION=$(templateVersion)
+      PR_BRANCH="upgrade_templates_${TEMPLATE_VERSION//./$'_'}"
+      echo "Checking for existing PR for branch $PR_BRANCH"
+      PR="$(az repos pr list --repository terraform --source-branch ${PR_BRANCH} --status active)"
+      if [ "$PR" == "[]" ]; then
+          echo "PR does not exist"
+      else
+          echo "PR already exist"
+          exit 0
+      fi
+      echo "##vso[task.setvariable variable=prBranch]$PR_BRANCH"
+    env:
+      AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+    condition: and(succeeded(), eq(variables['updateCheckOk'], 'Yes'))
+    displayName: Check for existing PR
+  - bash: |
+      set -e
+      ls -ltr
+      cd xkf-templates/azure
+      find . -type f -name "*.tf" | grep -v tenant.tf | xargs cp --parents -t $(Build.SourcesDirectory)
+      cd $(Build.SourcesDirectory)
+      rm -rf xkf-templates
+      AKS1="aks/aks1.tf"
+      AKS2="aks/aks2.tf"
+      AKS1_STATUS="$(git ls-files --others | grep ${AKS1} | xargs echo -n)" 
+      AKS2_STATUS="$(git ls-files --others | grep ${AKS2} | xargs echo -n)" 
+      if [ "$AKS1_STATUS" == "$AKS1" ]; then
+          echo "File $AKS1 untracked and hence not used and will therefore be ignored."
+          rm -f "$AKS1"
+      fi
+      if [ "$AKS2_STATUS" == "$AKS2" ]; then
+          echo "File $AKS2 untracked and hence not used and will therefore be ignored."
+          rm -f "$AKS2"
+      fi
+      echo $(templateVersion) > template.version
+    condition: and(succeeded(), ne(variables['prBranch'], ''))
+    displayName: Apply template
+  - bash: |
+      cd $(Build.SourcesDirectory)
+      git ls-remote --exit-code --heads origin $(prBranch)
+      if [ $? == 0 ]; then
+          echo "Branch $(prBranch) alredy exist, please delete it."
+          exit 1
+      fi      
+      set -e
+      echo "Checking out branch: $(prBranch)"
+      git config --global user.email "azure-pipelines@$(System.TeamProject).$(Build.Repository.Name)"
+      git config --global user.name "Azure Pipelines ($(System.TeamProject) $(Build.Repository.Name))"
+      git checkout -b $(prBranch)
+      git add .
+      git status
+      git commit -m "Upgrade from template version $(templateVersion)"
+      git push origin $(prBranch)
+      echo "Creating PR for branch: $(prBranch)"
+      az repos pr create -r terraform -s $(prBranch) -t main --title "Upgrade from template version $(templateVersion)" --delete-source-branch true
+    env:
+      AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+    condition: and(succeeded(), ne(variables['prBranch'], ''))
+    displayName: Create PR
