@@ -1,10 +1,5 @@
-# tflint-ignore: terraform_unused_declarations
 variable "tenant_id" {
   description = "The id of the tenant"
-  type        = string
-}
-variable "location" {
-  description = "The name of the location"
   type        = string
 }
 
