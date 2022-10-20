@@ -35,11 +35,6 @@ variable "environment" {
   type        = string
 }
 
-variable "name" {
-  description = "The commonName to use for the deploy"
-  type        = string
-}
-
 variable "vnet_config" {
   description = "Address spaces used by virtual network."
   type = object({

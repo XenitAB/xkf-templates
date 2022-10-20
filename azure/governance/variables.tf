@@ -33,6 +33,12 @@ variable "environment" {
   type        = string
 }
 
+variable "delegate_sub_groups" {
+  description = "Should the subscription groups be delegated to global groups (example: az-sub-[subName]-all-owner)"
+  type        = bool
+  default     = false
+}
+
 variable "tenant_resource_group_configs" {
   description = "Resource group configuration"
   type = list(

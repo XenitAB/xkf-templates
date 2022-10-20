@@ -61,20 +61,18 @@ steps:
       ls -ltr
       cd xkf-templates/azure
       find . -type f -name "*.tf" | grep -v tenant.tf | xargs cp --parents -t $(Build.SourcesDirectory)
+      find . -type f -name "*.lock.hcl" | xargs cp --parents -t $(Build.SourcesDirectory)
       cd $(Build.SourcesDirectory)
       rm -rf xkf-templates
-      AKS1="aks/aks1.tf"
-      AKS2="aks/aks2.tf"
-      AKS1_STATUS="$(git ls-files --others | grep ${AKS1} | xargs echo -n)" 
-      AKS2_STATUS="$(git ls-files --others | grep ${AKS2} | xargs echo -n)" 
-      if [ "$AKS1_STATUS" == "$AKS1" ]; then
-          echo "File $AKS1 untracked and hence not used and will therefore be ignored."
-          rm -f "$AKS1"
-      fi
-      if [ "$AKS2_STATUS" == "$AKS2" ]; then
-          echo "File $AKS2 untracked and hence not used and will therefore be ignored."
-          rm -f "$AKS2"
-      fi
+      # Delete unused optional files
+      OPTIONAL_FILES="aks/aks1.tf aks/aks2.tf hub/azpagent.tf hub/ghrunner.tf"
+      for FILE in $OPTIONAL_FILES; do
+            STATUS="$(git ls-files --others | grep ${FILE} | xargs echo -n)" 
+            if [ "$STATUS" == "$FILE" ]; then
+                echo "File $FILE untracked and hence not used and will therefore be ignored."
+                rm -f "$FILE"
+            fi
+      done
       echo $(templateVersion) > template.version
     condition: and(succeeded(), ne(variables['prBranch'], ''))
     displayName: Apply template

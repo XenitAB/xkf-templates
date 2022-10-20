@@ -58,30 +58,6 @@ locals {
       }
     },
     {
-      common_name                = "dns",
-      delegate_aks               = false,
-      delegate_key_vault         = true,
-      delegate_service_endpoint  = false,
-      delegate_service_principal = false,
-      lock_resource_group        = false,
-      disable_unique_suffix      = false,
-      tags = {
-        "description" = "Used for main dns"
-      }
-    },
-    {
-      common_name                = "azpagent",
-      delegate_aks               = false,
-      delegate_key_vault         = true,
-      delegate_service_endpoint  = false,
-      delegate_service_principal = false,
-      lock_resource_group        = false,
-      disable_unique_suffix      = false,
-      tags = {
-        "description" = "Azure Pipelines Agent"
-      }
-    },
-    {
       common_name                = "aks",
       delegate_aks               = false,
       delegate_key_vault         = true,
@@ -107,6 +83,7 @@ module "governance_global" {
   azure_ad_group_prefix        = var.azure_ad_group_prefix
   aks_group_name_prefix        = var.aks_group_name_prefix
   partner_id                   = var.partner_id
+  delegate_sub_groups          = var.delegate_sub_groups
 }
 
 module "governance_regional" {
