@@ -35,6 +35,20 @@ variable "environment" {
   type        = string
 }
 
+# tflint-ignore: terraform_unused_declarations
+variable "ghrunner_image_id" {
+  description = "The image to use for the Github runners"
+  type        = string
+  default     = ""
+}
+
+# tflint-ignore: terraform_unused_declarations
+variable "azpagent_image_id" {
+  description = "The image to use for the Azure Devops agent pools"
+  type        = string
+  default     = "/communityGalleries/xenit-7d3dd81e-0b94-4684-810c-0685bca1377f/images/azdo-agent/versions/1.0.0"
+}
+
 variable "vnet_config" {
   description = "Address spaces used by virtual network."
   type = object({
