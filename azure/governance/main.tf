@@ -4,7 +4,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.24.0"
+      version = "3.28.0"
     }
     azuread = {
       source  = "hashicorp/azuread"
@@ -74,7 +74,7 @@ locals {
 }
 
 module "governance_global" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/governance-global?ref=2022.10.1"
+  source = "github.com/xenitab/terraform-modules//modules/azure/governance-global?ref=2022.10.2"
 
   environment                  = var.environment
   subscription_name            = var.subscription_name
@@ -87,7 +87,7 @@ module "governance_global" {
 }
 
 module "governance_regional" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/governance-regional?ref=2022.10.1"
+  source = "github.com/xenitab/terraform-modules//modules/azure/governance-regional?ref=2022.10.2"
 
   environment                  = var.environment
   location                     = var.location
@@ -102,7 +102,7 @@ module "governance_regional" {
 }
 
 module "xkf_governance_global" {
-  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global?ref=2022.10.1"
+  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global?ref=2022.10.2"
   cloud_provider    = "azure"
   environment       = var.environment
   subscription_name = var.subscription_name
