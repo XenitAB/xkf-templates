@@ -26,14 +26,15 @@ steps:
     displayName: Fetch template
   - bash: |
       set -e
-      echo "Checking version: $(templateVersion)"
+      TEMPLATE_VERSION=$(templateVersion)
+      echo "Checking version: $TEMPLATE_VERSION"
       VERSION_FILE="$(Build.SourcesDirectory)/template.version"
 
       if [ -f "$VERSION_FILE" ]; then
-          echo "$VERSION_FILE exists."
           CURRENT_VERSION=$(cat "$VERSION_FILE")
-          if [ "$CURRENT_VERSION" == "$templateVersion" ]; then
-              echo "Template version $templateVersion already applied"
+          echo "$VERSION_FILE contains version $CURRENT_VERSION"
+          if [ "$CURRENT_VERSION" == "$TEMPLATE_VERSION" ]; then
+              echo "Template version $TEMPLATE_VERSION already applied"
               exit 0
           fi 
       fi
@@ -44,11 +45,14 @@ steps:
       TEMPLATE_VERSION=$(templateVersion)
       PR_BRANCH="upgrade_templates_${TEMPLATE_VERSION//./$'_'}"
       echo "Checking for existing PR for branch $PR_BRANCH"
-      PR="$(az repos pr list --repository terraform --source-branch ${PR_BRANCH} --status active)"
-      if [ "$PR" == "[]" ]; then
-          echo "PR does not exist"
-      else
-          echo "PR already exist"
+      ACTIVE_PR="$(az repos pr list --repository terraform --source-branch ${PR_BRANCH} --status active)"
+      if [ "$ACTIVE_PR" != "[]" ]; then
+          echo "Active PR already exist"
+          exit 0
+      fi
+      COMPLETED_PR="$(az repos pr list --repository terraform --source-branch ${PR_BRANCH} --status completed)"
+      if [ "$COMPLETED_PR" != "[]" ]; then
+          echo "Completed PR already exist"
           exit 0
       fi
       echo "##vso[task.setvariable variable=prBranch]$PR_BRANCH"
