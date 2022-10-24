@@ -180,3 +180,15 @@ variable "promtail_included_tenant_namespaces" {
   type        = list(string)
   default     = []
 }
+
+variable "public_ip_prefix_configuration" {
+  description = "Configuration for public IP prefix"
+  type = object({
+    count         = number
+    prefix_length = number
+  })
+  default = {
+    count         = 2
+    prefix_length = 30
+  }
+}
