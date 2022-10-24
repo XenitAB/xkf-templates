@@ -61,6 +61,71 @@ variable "tenant_resource_group_configs" {
   )
 }
 
+variable "platform_resource_group_configs" {
+  description = "Resource group configuration"
+  type = list(
+    object({
+      common_name                = string
+      delegate_aks               = bool # Delegate aks permissions
+      delegate_key_vault         = bool # Delegate KeyVault creation
+      delegate_service_endpoint  = bool # Delegate Service Endpoint permissions
+      delegate_service_principal = bool # Delegate Service Principal
+      lock_resource_group        = bool # Adds management_lock (CanNotDelete) to the resource group
+      disable_unique_suffix      = bool
+      tags                       = map(string)
+    })
+  )
+  default = [
+    {
+      common_name                = "core",
+      delegate_aks               = false,
+      delegate_key_vault         = true,
+      delegate_service_endpoint  = false,
+      delegate_service_principal = false,
+      lock_resource_group        = false,
+      disable_unique_suffix      = false,
+      tags = {
+        "description" = "Core infrastructure"
+      }
+    },
+    {
+      common_name                = "log",
+      delegate_aks               = false,
+      delegate_key_vault         = false,
+      delegate_service_endpoint  = false,
+      delegate_service_principal = false,
+      lock_resource_group        = true,
+      disable_unique_suffix      = false,
+      tags = {
+        "description" = "Managing logs"
+      }
+    },
+    {
+      common_name                = "hub",
+      delegate_aks               = false,
+      delegate_key_vault         = true,
+      delegate_service_endpoint  = false,
+      delegate_service_principal = false,
+      lock_resource_group        = false,
+      disable_unique_suffix      = false,
+      tags = {
+        "description" = "Hub for SPOF infra"
+      }
+    },
+    {
+      common_name                = "aks",
+      delegate_aks               = false,
+      delegate_key_vault         = true,
+      delegate_service_endpoint  = false,
+      delegate_service_principal = false,
+      lock_resource_group        = false,
+      disable_unique_suffix      = false,
+      tags = {
+        "description" = "Azure Kubernetes Service"
+      }
+    },
+  ]
+}
 variable "owner_service_principal_name" {
   description = "The name of the service principal that will be used to run terraform and is owner of the subsciptions"
   type        = string

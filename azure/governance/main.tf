@@ -19,66 +19,13 @@ provider "azurerm" {
 
 provider "azuread" {}
 
-locals {
-  resource_group_configs = [
-    {
-      common_name                = "core",
-      delegate_aks               = false,
-      delegate_key_vault         = true,
-      delegate_service_endpoint  = false,
-      delegate_service_principal = false,
-      lock_resource_group        = false,
-      disable_unique_suffix      = false,
-      tags = {
-        "description" = "Core infrastructure"
-      }
-    },
-    {
-      common_name                = "log",
-      delegate_aks               = false,
-      delegate_key_vault         = false,
-      delegate_service_endpoint  = false,
-      delegate_service_principal = false,
-      lock_resource_group        = true,
-      disable_unique_suffix      = false,
-      tags = {
-        "description" = "Managing logs"
-      }
-    },
-    {
-      common_name                = "hub",
-      delegate_aks               = false,
-      delegate_key_vault         = true,
-      delegate_service_endpoint  = false,
-      delegate_service_principal = false,
-      lock_resource_group        = false,
-      disable_unique_suffix      = false,
-      tags = {
-        "description" = "Hub for SPOF infra"
-      }
-    },
-    {
-      common_name                = "aks",
-      delegate_aks               = false,
-      delegate_key_vault         = true,
-      delegate_service_endpoint  = false,
-      delegate_service_principal = false,
-      lock_resource_group        = false,
-      disable_unique_suffix      = false,
-      tags = {
-        "description" = "Azure Kubernetes Service"
-      }
-    },
-  ]
-}
-
 module "governance_global" {
   source = "github.com/xenitab/terraform-modules//modules/azure/governance-global?ref=2022.10.2"
 
   environment                  = var.environment
   subscription_name            = var.subscription_name
   owner_service_principal_name = var.owner_service_principal_name
-  resource_group_configs       = concat(local.resource_group_configs, var.tenant_resource_group_configs)
+  resource_group_configs       = concat(var.platform_resource_group_configs, var.tenant_resource_group_configs)
   azure_ad_group_prefix        = var.azure_ad_group_prefix
   aks_group_name_prefix        = var.aks_group_name_prefix
   partner_id                   = var.partner_id
@@ -93,7 +40,7 @@ module "governance_regional" {
   location_short               = var.location_short
   owner_service_principal_name = var.owner_service_principal_name
   core_name                    = var.core_name
-  resource_group_configs       = concat(local.resource_group_configs, var.tenant_resource_group_configs)
+  resource_group_configs       = concat(var.platform_resource_group_configs, var.tenant_resource_group_configs)
   unique_suffix                = var.unique_suffix
   azuread_groups               = module.governance_global.azuread_groups
   azuread_apps                 = module.governance_global.azuread_apps
