@@ -91,5 +91,6 @@ module "aks_regional" {
   aks_authorized_ips    = var.aks_authorized_ips
   azure_ad_group_prefix = var.azure_ad_group_prefix
   aks_managed_identity  = module.xkf_governance_global_data.aad_groups.aks_managed_identity.id
-}
 
+  public_ip_prefix_configuration = var.public_ip_prefix_configuration
+}
