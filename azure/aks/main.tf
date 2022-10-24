@@ -58,8 +58,7 @@ provider "tls" {}
 provider "flux" {}
 
 locals {
-  name      = "aks"
-  core_name = "core"
+  name = "aks"
 }
 
 module "xkf_governance_global_data" {

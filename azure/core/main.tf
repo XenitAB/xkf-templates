@@ -19,11 +19,6 @@ provider "azurerm" {
 
 provider "azuread" {}
 
-locals {
-  core_name = "core"
-}
-
-
 module "core" {
   source = "github.com/xenitab/terraform-modules//modules/azure/core?ref=2022.10.2"
 

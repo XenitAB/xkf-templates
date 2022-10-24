@@ -70,7 +70,6 @@ locals {
       }
     },
   ]
-  core_name = "core"
 }
 
 module "governance_global" {
