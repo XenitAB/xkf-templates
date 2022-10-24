@@ -93,7 +93,7 @@ module "governance_regional" {
   location                     = var.location
   location_short               = var.location_short
   owner_service_principal_name = var.owner_service_principal_name
-  core_name                    = local.core_name
+  core_name                    = var.core_name
   resource_group_configs       = concat(local.resource_group_configs, var.tenant_resource_group_configs)
   unique_suffix                = var.unique_suffix
   azuread_groups               = module.governance_global.azuread_groups

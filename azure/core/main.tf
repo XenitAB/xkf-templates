@@ -30,7 +30,7 @@ module "core" {
   environment           = var.environment
   location_short        = var.location_short
   subscription_name     = var.subscription_name
-  name                  = local.core_name
+  name                  = var.core_name
   vnet_config           = var.vnet_config
   peering_config        = var.peering_config
   azure_ad_group_prefix = var.azure_ad_group_prefix

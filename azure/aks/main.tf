@@ -83,7 +83,7 @@ module "aks_regional" {
   global_location_short = var.location_short
   name                  = local.name
   subscription_name     = var.subscription_name
-  core_name             = local.core_name
+  core_name             = var.core_name
   unique_suffix         = var.unique_suffix
   namespaces = [for n in var.tenant_namespaces :
     {

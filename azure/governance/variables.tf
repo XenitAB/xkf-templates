@@ -8,6 +8,12 @@ variable "location_short" {
   type        = string
 }
 
+variable "core_name" {
+  description = "The name of the core infra"
+  type        = string
+  default     = "core"
+}
+
 variable "subscription_name" {
   description = "The name of the subscription"
   type        = string
