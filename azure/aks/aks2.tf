@@ -30,7 +30,7 @@ module "aks2" {
 
   environment     = var.environment
   location_short  = var.location_short
-  name            = local.name
+  name            = var.aks_name
   core_name       = var.core_name
   aks_name_suffix = 2
   unique_suffix   = var.unique_suffix
@@ -66,7 +66,7 @@ module "aks2_core" {
 
   environment                            = var.environment
   location_short                         = var.location_short
-  name                                   = local.name
+  name                                   = var.aks_name
   aks_name_suffix                        = 2
   global_location_short                  = var.location_short
   kubernetes_network_policy_default_deny = var.kubernetes_network_policy_default_deny

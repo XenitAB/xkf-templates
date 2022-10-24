@@ -57,9 +57,6 @@ provider "tls" {}
 
 provider "flux" {}
 
-locals {
-  name = "aks"
-}
 
 module "xkf_governance_global_data" {
   source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=2022.10.2"
@@ -80,7 +77,7 @@ module "aks_regional" {
   environment           = var.environment
   location_short        = var.location_short
   global_location_short = var.location_short
-  name                  = local.name
+  name                  = var.aks_name
   subscription_name     = var.subscription_name
   core_name             = var.core_name
   unique_suffix         = var.unique_suffix

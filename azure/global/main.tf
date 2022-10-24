@@ -52,7 +52,7 @@ module "aks_global" {
   location_short        = var.location_short
   unique_suffix         = var.unique_suffix
   dns_zone              = var.dns_zones
-  name                  = "aks"
+  name                  = var.aks_name
   aks_managed_identity  = module.xkf_governance_global_data.aad_groups.aks_managed_identity.id
   subscription_name     = var.subscription_name
   aks_group_name_prefix = var.aks_group_name_prefix

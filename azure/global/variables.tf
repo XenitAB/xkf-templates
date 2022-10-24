@@ -19,6 +19,12 @@ variable "subscription_name" {
   type        = string
 }
 
+variable "aks_name" {
+  description = "The name of AKS deployment"
+  type        = string
+  default     = "aks"
+}
+
 variable "aks_group_name_prefix" {
   description = "Prefix for AKS Azure AD groups"
   type        = string

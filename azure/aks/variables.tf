@@ -23,6 +23,12 @@ variable "unique_suffix" {
   type        = string
 }
 
+variable "aks_name" {
+  description = "The name of AKS deployment"
+  type        = string
+  default     = "aks"
+}
+
 variable "core_name" {
   description = "The name of the core infra"
   type        = string
