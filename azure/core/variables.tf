@@ -20,6 +20,12 @@ variable "unique_suffix" {
   type        = string
 }
 
+variable "core_name" {
+  description = "The name of the core infra"
+  type        = string
+  default     = "core"
+}
+
 variable "azure_ad_group_prefix" {
   description = "Prefix for Azure AD Groupss"
   type        = string

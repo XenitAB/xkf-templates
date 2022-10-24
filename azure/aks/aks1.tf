@@ -31,7 +31,7 @@ module "aks1" {
   environment     = var.environment
   location_short  = var.location_short
   name            = local.name
-  core_name       = local.core_name
+  core_name       = var.core_name
   aks_name_suffix = 1
   unique_suffix   = var.unique_suffix
 
