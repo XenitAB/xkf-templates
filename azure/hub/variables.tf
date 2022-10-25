@@ -49,6 +49,21 @@ variable "azpagent_image_id" {
   default     = "/communityGalleries/xenit-7d3dd81e-0b94-4684-810c-0685bca1377f/images/azdo-agent/versions/1.0.0"
 }
 
+
+# tflint-ignore: terraform_unused_declarations
+variable "azpagent_name" {
+  description = "The commonName to use for the deploy"
+  type        = string
+  default     = "azpagent"
+}
+
+variable "keyvault_name" {
+  description = "The keyvault name"
+  type        = string
+  default     = ""
+}
+
+
 variable "vnet_config" {
   description = "Address spaces used by virtual network."
   type = object({

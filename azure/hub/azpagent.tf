@@ -3,7 +3,8 @@ module "azpagent" {
   environment       = var.environment
   location_short    = var.location_short
   unique_suffix     = var.unique_suffix
-  name              = "azpagent"
+  name              = var.azpagent_name
+  keyvault_name     = var.keyvault_name
   source_image_id   = var.azpagent_image_id
   vmss_sku          = "Standard_F4s_v2"
   vmss_disk_size_gb = 64
