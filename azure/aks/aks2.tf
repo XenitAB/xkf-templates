@@ -82,6 +82,7 @@ module "aks2_core" {
   aad_pod_identity_config = module.aks_regional.aad_pod_identity
   velero_config           = module.aks_regional.velero
   external_dns_config     = module.aks_regional.external_dns_identity
+  external_dns_hostname   = var.external_dns_hostname
 
   fluxcd_v2_config = local.fluxcd_v2_config
 

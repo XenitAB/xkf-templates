@@ -192,3 +192,9 @@ variable "public_ip_prefix_configuration" {
     prefix_length = 30
   }
 }
+
+variable "external_dns_hostname" {
+  description = "hostname for ingress-nginx to use for external-dns"
+  type        = string
+  default     = ""
+}
