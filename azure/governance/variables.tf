@@ -56,6 +56,7 @@ variable "tenant_resource_group_configs" {
       delegate_service_principal = bool # Delegate Service Principal
       lock_resource_group        = bool # Adds management_lock (CanNotDelete) to the resource group
       disable_unique_suffix      = bool
+      key_vault_purge_protection_enabled = optional(bool, false)
       tags                       = map(string)
     })
   )
@@ -72,6 +73,7 @@ variable "platform_resource_group_configs" {
       delegate_service_principal = bool # Delegate Service Principal
       lock_resource_group        = bool # Adds management_lock (CanNotDelete) to the resource group
       disable_unique_suffix      = bool
+      key_vault_purge_protection_enabled = optional(bool, false)
       tags                       = map(string)
     })
   )
