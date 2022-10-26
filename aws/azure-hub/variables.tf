@@ -1,0 +1,83 @@
+variable "azure_location_short" {
+  description = "The short name of the location"
+  type        = string
+}
+
+variable "azure_subscription_name" {
+  description = "The name of the subscription"
+  type        = string
+}
+
+variable "unique_suffix" {
+  description = "Unique suffix that is used in globally unique resources names"
+  type        = string
+}
+
+variable "azure_ad_group_prefix" {
+  description = "Prefix for Azure AD Groupss"
+  type        = string
+}
+
+# tflint-ignore: terraform_unused_declarations
+variable "aks_group_name_prefix" {
+  description = "Prefix for AKS Azure AD groups"
+  type        = string
+}
+
+variable "environment" {
+  description = "The environment name to use for the deploy"
+  type        = string
+}
+
+# tflint-ignore: terraform_unused_declarations
+variable "ghrunner_image_id" {
+  description = "The image to use for the Github runners"
+  type        = string
+  default     = ""
+}
+
+# tflint-ignore: terraform_unused_declarations
+variable "azpagent_image_id" {
+  description = "The image to use for the Azure Devops agent pools"
+  type        = string
+  default     = "/communityGalleries/xenit-7d3dd81e-0b94-4684-810c-0685bca1377f/images/azdo-agent/versions/1.0.0"
+}
+
+
+# tflint-ignore: terraform_unused_declarations
+variable "azpagent_name" {
+  description = "The commonName to use for the deploy"
+  type        = string
+  default     = "azpagent"
+}
+
+variable "keyvault_name" {
+  description = "The keyvault name"
+  type        = string
+  default     = ""
+}
+
+
+variable "vnet_config" {
+  description = "Address spaces used by virtual network."
+  type = object({
+    address_space = list(string)
+    subnets = list(object({
+      name              = string
+      cidr              = string
+      service_endpoints = list(string)
+    }))
+  })
+}
+
+variable "peering_config" {
+  description = "Peering configuration"
+  type = list(object({
+    name                         = string
+    remote_virtual_network_id    = string
+    allow_forwarded_traffic      = bool
+    use_remote_gateways          = bool
+    allow_virtual_network_access = bool
+  }))
+  default = []
+}
