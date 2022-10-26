@@ -1,8 +1,3 @@
-variable "azure_location_short" {
-  description = "The short name of the location"
-  type        = string
-}
-
 variable "azure_subscription_name" {
   description = "The name of the subscription"
   type        = string
@@ -20,12 +15,6 @@ variable "unique_suffix" {
 variable "aks_group_name_prefix" {
   description = "Prefix for AKS Azure AD groups"
   type        = string
-}
-
-variable "core_name" {
-  description = "The name of the core infra"
-  type        = string
-  default     = "core"
 }
 
 variable "aws_location" {
