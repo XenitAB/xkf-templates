@@ -51,6 +51,7 @@ variable "azpagent_name" {
   default     = "azpagent"
 }
 
+# tflint-ignore: terraform_unused_declarations
 variable "keyvault_name" {
   description = "The keyvault name"
   type        = string
