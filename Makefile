@@ -16,7 +16,7 @@ fmt:
 
 	export -f tf_fmt
 
-	TF_MODULES=$$(find aws azure -maxdepth 1 -mindepth 1 -type d | grep -v \\.ci)
+	TF_MODULES=$$(find aws azure -maxdepth 1 -mindepth 1 -type d | grep -v \\.ci | grep -v \\.github)
 
 	PARALLEL_JOBS=10
 	printf '%s\n' $${TF_MODULES[@]} | parallel --halt now,fail=1 -j$${PARALLEL_JOBS} "tf_fmt {}"
@@ -29,7 +29,7 @@ lint:
 	MODULE_GROUPS="azure aws"
 	for MODULE_GROUP in $${MODULE_GROUPS}; do
 		tflint --init -c $${MODULE_GROUP}/.tflint.hcl
-		MODULES=$$(find $${MODULE_GROUP} -mindepth 1 -maxdepth 1 -type d | grep -v \\.ci)
+		MODULES=$$(find $${MODULE_GROUP} -mindepth 1 -maxdepth 1 -type d | grep -v \\.ci | grep -v \\.github)
 		for MODULE in $$MODULES; do
 			echo lint: $${MODULE}
 			tflint -c $${MODULE_GROUP}/.tflint.hcl $${MODULE}
@@ -70,7 +70,7 @@ validate:
 
 	export -f tf_validate
 
-	TF_MODULES=$$(find azure aws -maxdepth 1 -mindepth 1 -type d | grep -v \\.ci)
+	TF_MODULES=$$(find azure aws -maxdepth 1 -mindepth 1 -type d | grep -v \\.ci | grep -v \\.github)
 
 	PARALLEL_JOBS=10
 	printf '%s\n' $${TF_MODULES[@]} | parallel --halt now,fail=1 -j$${PARALLEL_JOBS} "tf_validate {}"
@@ -80,7 +80,7 @@ validate:
 init:
 	set -e
 	CURRENT_DIR=$${PWD}
-	MODULES=$$(find azure aws -mindepth 1 -maxdepth 1 -type d | grep -v \\.ci)
+	MODULES=$$(find azure aws -mindepth 1 -maxdepth 1 -type d | grep -v \\.ci | grep -v \\.github)
 	for MODULE in $$MODULES; do
 		cd $${CURRENT_DIR}/$${MODULE}
 		echo terraform-init: $${CURRENT_DIR}/$${MODULE}
