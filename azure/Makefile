@@ -2,7 +2,7 @@
 SHELL:=/bin/bash
 
 SUFFIX="tfstateXXXX"
-IMAGE="ghcr.io/xenitab/github-actions/tools:2022.09.1"
+IMAGE="ghcr.io/xenitab/github-actions/tools:2022.10.2"
 AWS_ENABLED:=false
 
 OPA_BLAST_RADIUS := $(if $(OPA_BLAST_RADIUS),$(OPA_BLAST_RADIUS),50)
