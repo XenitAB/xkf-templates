@@ -59,18 +59,23 @@ jobs:
               exit 0
             fi
           fi
+          SUFFIX=$(grep SUFFIX=\"tfstate Makefile)
           echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
+          echo "suffix=$SUFFIX" >> $GITHUB_OUTPUT
 
       - name: Apply template
         if: steps.check_pr.outputs.pr_branch != ''
         run: |
           set -x
           TEMPLATE_VERSION="${{ steps.check_update.outputs.template_version }}"
+          SUFFIX="${{ steps.check_pr.outputs.suffix }}"
           cd xkf-templates/azure
           find . -type f -name "*.tf" | grep -v tenant | xargs cp --parents -t ${GITHUB_WORKSPACE}/this
           find . -type f -name "*.lock.hcl" | xargs cp --parents -t ${GITHUB_WORKSPACE}/this
           find azure/.github/* -type f -name "*.yaml" | xargs cp --parents -t ${GITHUB_WORKSPACE}/this
+          cp Makefile ${GITHUB_WORKSPACE}/this
           cd ${GITHUB_WORKSPACE}/this
+          sed -i '/SUFFIX=\"tfstate/c\'"$SUFFIX" Makefile
           # Delete unused optional files
           OPTIONAL_FILES="aks/aks1.tf aks/aks2.tf hub/azpagent.tf hub/ghrunner.tf"
           for FILE in $OPTIONAL_FILES; do

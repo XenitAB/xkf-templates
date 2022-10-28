@@ -62,13 +62,16 @@ steps:
     displayName: Check for existing PR
   - bash: |
       set -e
-      ls -ltr
+      cd $(Build.SourcesDirectory)
+      SUFFIX=$(grep SUFFIX=\"tfstate Makefile)
       cd xkf-templates/azure
       find . -type f -name "*.tf" | grep -v tenant | xargs cp --parents -t $(Build.SourcesDirectory)
       find . -type f -name "*.lock.hcl" | xargs cp --parents -t $(Build.SourcesDirectory)
       find . -type f -name "pipeline-*.yaml" | xargs cp --parents -t $(Build.SourcesDirectory)
+      cp Makefile $(Build.SourcesDirectory)
       cd $(Build.SourcesDirectory)
       rm -rf xkf-templates
+      sed -i '/SUFFIX=\"tfstate/c\'"$SUFFIX" Makefile
       # Delete unused optional files
       OPTIONAL_FILES="aks/aks1.tf aks/aks2.tf hub/azpagent.tf hub/ghrunner.tf"
       for FILE in $OPTIONAL_FILES; do
