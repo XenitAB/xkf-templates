@@ -73,7 +73,7 @@ steps:
       rm -rf xkf-templates
       sed -i '/SUFFIX=\"tfstate/c\'"$SUFFIX" Makefile
       # Delete unused optional files
-      OPTIONAL_FILES="aws-eks/eks1.tf aws-eks/eks2.tf hub/azpagent.tf hub/ghrunner.tf"
+      OPTIONAL_FILES="aws-eks/eks1.tf aws-eks/eks2.tf azure-hub/azpagent.tf azure-hub/ghrunner.tf"
       for FILE in $OPTIONAL_FILES; do
             STATUS="$(git ls-files --others | grep ${FILE} | xargs echo -n)" 
             if [ "$STATUS" == "$FILE" ]; then

@@ -32,6 +32,25 @@ variable "eks_name" {
   default     = "eks"
 }
 
+# tflint-ignore: terraform_unused_declarations
+variable "core_name" {
+  description = "The name of the core infra"
+  type        = string
+  default     = "core"
+}
+
+# tflint-ignore: terraform_unused_declarations
+variable "azure_location" {
+  description = "The name of the location"
+  type        = string
+}
+
+# tflint-ignore: terraform_unused_declarations
+variable "azure_location_short" {
+  description = "The short name of the location"
+  type        = string
+}
+
 variable "eks_config" {
   description = "The EKS Config"
   type = object({
