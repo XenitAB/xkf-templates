@@ -20,7 +20,7 @@ provider "azurerm" {
 provider "azuread" {}
 
 module "core" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/core?ref=2022.10.2"
+  source = "github.com/xenitab/terraform-modules//modules/azure/core?ref=2022.10.3"
 
   environment           = var.environment
   location_short        = var.location_short
