@@ -57,7 +57,7 @@ variable "tenant_resource_group_configs" {
       lock_resource_group                = bool # Adds management_lock (CanNotDelete) to the resource group
       disable_unique_suffix              = bool
       key_vault_purge_protection_enabled = optional(bool, false)
-      tags                       = map(string)
+      tags                               = map(string)
     })
   )
 }
@@ -74,7 +74,7 @@ variable "platform_resource_group_configs" {
       lock_resource_group                = bool # Adds management_lock (CanNotDelete) to the resource group
       disable_unique_suffix              = bool
       key_vault_purge_protection_enabled = optional(bool, false)
-      tags                       = map(string)
+      tags                               = map(string)
     })
   )
   default = [
