@@ -37,12 +37,25 @@ variable "ghrunner_image_id" {
 }
 
 # tflint-ignore: terraform_unused_declarations
+variable "ghrunner_vmss_sku" {
+  description = "The sku for github runner VMSS instances"
+  type        = string
+  default     = "Standard_F4s_v2"
+}
+
+# tflint-ignore: terraform_unused_declarations
 variable "azpagent_image_id" {
   description = "The image to use for the Azure Devops agent pools"
   type        = string
   default     = "/communityGalleries/xenit-7d3dd81e-0b94-4684-810c-0685bca1377f/images/azdo-agent/versions/1.0.0"
 }
 
+# tflint-ignore: terraform_unused_declarations
+variable "azpagent_vmss_sku" {
+  description = "The sku for azpagent VMSS instances"
+  type        = string
+  default     = "Standard_F4s_v2"
+}
 
 # tflint-ignore: terraform_unused_declarations
 variable "azpagent_name" {
@@ -57,7 +70,6 @@ variable "keyvault_name" {
   type        = string
   default     = ""
 }
-
 
 variable "vnet_config" {
   description = "Address spaces used by virtual network."
