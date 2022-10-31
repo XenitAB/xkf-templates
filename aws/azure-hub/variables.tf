@@ -40,7 +40,7 @@ variable "ghrunner_image_id" {
 variable "ghrunner_vmss_sku" {
   description = "The sku for github runner VMSS instances"
   type        = string
-  default     = "Standard_F4s_v2"
+  default     = "Standard_D2s_v3"
 }
 
 # tflint-ignore: terraform_unused_declarations
