@@ -4,7 +4,7 @@ module "ghrunner" {
   location_short    = var.location_short
   name              = "ghrunner"
   source_image_id   = var.ghrunner_image_id
-  vmss_sku          = "Standard_D2s_v3"
+  vmss_sku          = var.ghrunner_vmss_sku
   vmss_instances    = 2
   vmss_disk_size_gb = 50
   unique_suffix     = var.unique_suffix
