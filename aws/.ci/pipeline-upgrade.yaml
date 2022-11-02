@@ -55,6 +55,7 @@ steps:
           echo "Completed PR already exist"
           exit 0
       fi
+      git checkout $TEMPLATE_VERSION -b latest
       echo "##vso[task.setvariable variable=prBranch]$PR_BRANCH"
     env:
       AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
