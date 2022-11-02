@@ -59,6 +59,7 @@ jobs:
               exit 0
             fi
           fi
+          git checkout $TEMPLATE_VERSION -b latest
           SUFFIX=$(grep SUFFIX=\"tfstate Makefile)
           echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
           echo "suffix=$SUFFIX" >> $GITHUB_OUTPUT
