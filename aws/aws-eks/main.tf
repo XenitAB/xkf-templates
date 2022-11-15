@@ -59,7 +59,7 @@ provider "aws" {
 data "aws_caller_identity" "current" {}
 
 module "xkf_governance_global_data" {
-  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=2022.10.3"
+  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=2022.11.1"
   cloud_provider    = "aws"
   environment       = var.environment
   subscription_name = var.azure_subscription_name
@@ -73,7 +73,7 @@ module "xkf_governance_global_data" {
 }
 
 module "eks_global" {
-  source = "github.com/xenitab/terraform-modules//modules/aws/eks-global?ref=2022.10.3"
+  source = "github.com/xenitab/terraform-modules//modules/aws/eks-global?ref=2022.11.1"
 
   environment                    = var.environment
   name                           = var.eks_name
