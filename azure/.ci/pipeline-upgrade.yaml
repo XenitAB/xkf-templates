@@ -36,7 +36,7 @@ steps:
           if [ "$CURRENT_VERSION" == "$TEMPLATE_VERSION" ]; then
               echo "Template version $TEMPLATE_VERSION already applied"
               exit 0
-          fi 
+          fi
       fi
       echo "##vso[task.setvariable variable=updateCheckOk]Yes"
     displayName: Check update
@@ -76,7 +76,7 @@ steps:
       # Delete unused optional files
       OPTIONAL_FILES="aks/aks1.tf aks/aks2.tf hub/azpagent.tf hub/ghrunner.tf"
       for FILE in $OPTIONAL_FILES; do
-            STATUS="$(git ls-files --others | grep ${FILE} | xargs echo -n)" 
+            STATUS="$(git ls-files --others | grep ${FILE} | xargs echo -n)"
             if [ "$STATUS" == "$FILE" ]; then
                 echo "File $FILE is untracked and hence not used and will therefore be ignored."
                 rm -f "$FILE"
@@ -91,7 +91,7 @@ steps:
       if [ $? == 0 ]; then
           echo "Branch $(prBranch) alredy exist, please delete it."
           exit 1
-      fi      
+      fi
       set -e
       echo "Checking out branch: $(prBranch)"
       git config --global user.email "azure-pipelines@$(System.TeamProject).$(Build.Repository.Name)"

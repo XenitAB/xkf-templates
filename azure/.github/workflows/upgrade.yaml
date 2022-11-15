@@ -35,7 +35,7 @@ jobs:
               if [ "$CURRENT_VERSION" == "$TEMPLATE_VERSION" ]; then
                   echo "Template version $TEMPLATE_VERSION already applied"
                   exit 0
-              fi 
+              fi
           fi
           echo "update_check_ok=yes" >> $GITHUB_OUTPUT
           echo "template_version=$TEMPLATE_VERSION" >> $GITHUB_OUTPUT
@@ -81,7 +81,7 @@ jobs:
           # Delete unused optional files
           OPTIONAL_FILES="aks/aks1.tf aks/aks2.tf hub/azpagent.tf hub/ghrunner.tf"
           for FILE in $OPTIONAL_FILES; do
-            STATUS="$(git ls-files --others | grep ${FILE} | xargs echo -n)" 
+            STATUS="$(git ls-files --others | grep ${FILE} | xargs echo -n)"
             if [ "$STATUS" == "$FILE" ]; then
                 echo "File $FILE is untracked and hence not used and will therefore be ignored."
                 rm -f "$FILE"
@@ -105,7 +105,7 @@ jobs:
           if [ $? == 0 ]; then
               echo "Branch $PR_BRANCH alredy exist, please delete it."
               exit 1
-          fi      
+          fi
           set -e
           echo "Checking out branch: $PR_BRANCH"
           git checkout -b "$PR_BRANCH"
