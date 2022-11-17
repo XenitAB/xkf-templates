@@ -78,6 +78,6 @@ module "eks_global" {
   environment                    = var.environment
   name                           = var.eks_name
   unique_suffix                  = var.unique_suffix
-  eks_admin_assume_principal_ids = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
+  eks_admin_assume_principal_ids = local.allow_assume_eks_admin
   dns_zone                       = var.dns_zones
 }

@@ -1,7 +1,9 @@
 locals {
 
+  eks_admin_assume_principal_ids = [""]
+
   # Configure fluxcd_v2_config for either Azure Devops or Github in order to set up Gitops with FluxCD
-  # Below is an empty Github example 
+  # Below is an empty Github example
   fluxcd_v2_config = {
     type = "github"
     github = {
