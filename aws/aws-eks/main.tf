@@ -56,8 +56,6 @@ provider "aws" {
   }
 }
 
-data "aws_caller_identity" "current" {}
-
 module "xkf_governance_global_data" {
   source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=2022.11.1"
   cloud_provider    = "aws"
@@ -78,6 +76,6 @@ module "eks_global" {
   environment                    = var.environment
   name                           = var.eks_name
   unique_suffix                  = var.unique_suffix
-  eks_admin_assume_principal_ids = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"]
+  eks_admin_assume_principal_ids = local.eks_admin_assume_principal_ids
   dns_zone                       = var.dns_zones
 }
