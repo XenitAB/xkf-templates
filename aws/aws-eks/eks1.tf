@@ -23,7 +23,7 @@ provider "kubectl" {
 }
 
 module "eks1" {
-  source = "github.com/xenitab/terraform-modules//modules/aws/eks?ref=2022.11.1"
+  source = "github.com/xenitab/terraform-modules//modules/aws/eks?ref=b7c5767b281d2d33f765ccf815ba83de251e9a69"
 
   providers = {
     aws           = aws
@@ -43,7 +43,7 @@ module "eks1" {
 }
 
 module "eks1_core" {
-  source = "github.com/xenitab/terraform-modules//modules/kubernetes/eks-core?ref=2022.11.1"
+  source = "github.com/xenitab/terraform-modules//modules/kubernetes/eks-core?ref=b7c5767b281d2d33f765ccf815ba83de251e9a69"
 
   providers = {
     kubernetes = kubernetes.eks1
@@ -85,6 +85,7 @@ module "eks1_core" {
   azad_kube_proxy_enabled = true
   azad_kube_proxy_config = {
     fqdn         = "eks.${var.dns_zones[0]}"
+    azure_ad_group_prefix = var.aks_group_name_prefix
     allowed_ips  = var.eks_authorized_ips
     azure_ad_app = module.eks_global.azad_kube_proxy.azure_ad_app
   }
