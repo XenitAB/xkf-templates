@@ -51,9 +51,11 @@ module "eks2_core" {
     kubectl    = kubectl.eks2
   }
 
-  environment     = var.environment
-  name            = var.eks_name
-  eks_name_suffix = 2
+  environment       = var.environment
+  name              = var.eks_name
+  eks_name_suffix   = 2
+  subscription_name = var.azure_subscription_name
+  group_name_prefix = var.aks_group_name_prefix
   namespaces = [for n in var.tenant_namespaces :
     {
       name   = n.name
@@ -82,10 +84,9 @@ module "eks2_core" {
 
   azad_kube_proxy_enabled = true
   azad_kube_proxy_config = {
-    fqdn                  = "eks.${var.dns_zones[0]}"
-    azure_ad_group_prefix = var.aks_group_name_prefix
-    allowed_ips           = var.eks_authorized_ips
-    azure_ad_app          = module.eks_global.azad_kube_proxy.azure_ad_app
+    fqdn         = "eks.${var.dns_zones[0]}"
+    allowed_ips  = var.eks_authorized_ips
+    azure_ad_app = module.eks_global.azad_kube_proxy.azure_ad_app
   }
 
   falco_enabled = true

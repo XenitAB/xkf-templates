@@ -69,6 +69,8 @@ module "aks1_core" {
   name                                   = var.aks_name
   aks_name_suffix                        = 1
   global_location_short                  = var.location_short
+  subscription_name                      = var.subscription_name
+  group_name_prefix                      = var.aks_group_name_prefix
   kubernetes_network_policy_default_deny = var.kubernetes_network_policy_default_deny
 
   aad_groups = module.xkf_governance_global_data.aad_groups
@@ -93,10 +95,9 @@ module "aks1_core" {
 
   azad_kube_proxy_enabled = true
   azad_kube_proxy_config = {
-    fqdn                  = "aks-${var.location_short}.${var.dns_zones[0]}"
-    azure_ad_group_prefix = var.aks_group_name_prefix
-    allowed_ips           = var.aks_authorized_ips
-    azure_ad_app          = module.aks_regional.azad_kube_proxy.azure_ad_app
+    fqdn         = "aks-${var.location_short}.${var.dns_zones[0]}"
+    allowed_ips  = var.aks_authorized_ips
+    azure_ad_app = module.aks_regional.azad_kube_proxy.azure_ad_app
   }
 
   ingress_config = var.ingress_config
