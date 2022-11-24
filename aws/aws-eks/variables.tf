@@ -63,6 +63,11 @@ variable "eks_config" {
       max_size       = number
       instance_types = list(string)
       node_labels    = map(string)
+      node_taints = list(object({
+        key    = string
+        value  = string
+        effect = string
+      }))
     }))
   })
 }
