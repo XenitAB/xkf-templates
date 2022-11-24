@@ -59,7 +59,6 @@ jobs:
               exit 0
             fi
           fi
-          git checkout $TEMPLATE_VERSION -b latest
           SUFFIX=$(grep SUFFIX=\"tfstate Makefile)
           echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
           echo "suffix=$SUFFIX" >> $GITHUB_OUTPUT
@@ -71,6 +70,7 @@ jobs:
           TEMPLATE_VERSION="${{ steps.check_update.outputs.template_version }}"
           SUFFIX="${{ steps.check_pr.outputs.suffix }}"
           cd xkf-templates/azure
+          git switch -c latest $TEMPLATE_VERSION
           find . -type f -name "*.tf" | grep -v tenant | xargs cp --parents -t ${GITHUB_WORKSPACE}/this
           find . -type f -name "*.lock.hcl" | xargs cp --parents -t ${GITHUB_WORKSPACE}/this
           find . -type f  -wholename "*/.github/workflows/*.yaml" | xargs cp --parents -t ${GITHUB_WORKSPACE}/this

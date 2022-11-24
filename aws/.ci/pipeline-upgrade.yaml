@@ -55,7 +55,6 @@ steps:
           echo "Completed PR already exist"
           exit 0
       fi
-      git checkout $TEMPLATE_VERSION -b latest
       echo "##vso[task.setvariable variable=prBranch]$PR_BRANCH"
     env:
       AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
@@ -66,6 +65,7 @@ steps:
       cd $(Build.SourcesDirectory)
       SUFFIX=$(grep SUFFIX=\"tfstate Makefile)
       cd xkf-templates/aws
+      git switch -c latest $TEMPLATE_VERSION
       find . -type f -name "*.tf" | grep -v tenant | xargs cp --parents -t $(Build.SourcesDirectory)
       find . -type f -name "*.lock.hcl" | xargs cp --parents -t $(Build.SourcesDirectory)
       find . -type f -name "pipeline-*.yaml" | xargs cp --parents -t $(Build.SourcesDirectory)
