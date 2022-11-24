@@ -23,7 +23,7 @@ provider "kubectl" {
 }
 
 module "eks1" {
-  source = "github.com/xenitab/terraform-modules//modules/aws/eks?ref=2022.11.1"
+  source = "github.com/xenitab/terraform-modules//modules/aws/eks?ref=b7c5767b281d2d33f765ccf815ba83de251e9a69"
 
   providers = {
     aws           = aws
@@ -43,7 +43,7 @@ module "eks1" {
 }
 
 module "eks1_core" {
-  source = "github.com/xenitab/terraform-modules//modules/kubernetes/eks-core?ref=2022.11.1"
+  source = "github.com/xenitab/terraform-modules//modules/kubernetes/eks-core?ref=b7c5767b281d2d33f765ccf815ba83de251e9a69"
 
   providers = {
     kubernetes = kubernetes.eks1
@@ -51,9 +51,11 @@ module "eks1_core" {
     kubectl    = kubectl.eks1
   }
 
-  environment     = var.environment
-  name            = var.eks_name
-  eks_name_suffix = 1
+  environment       = var.environment
+  name              = var.eks_name
+  eks_name_suffix   = 1
+  subscription_name = var.azure_subscription_name
+  group_name_prefix = var.aks_group_name_prefix
   namespaces = [for n in var.tenant_namespaces :
     {
       name   = n.name
