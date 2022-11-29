@@ -48,7 +48,10 @@ module "governance_regional" {
 }
 
 module "xkf_governance_global" {
-  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global?ref=2022.11.2"
+  source = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global?ref=2022.11.2"
+  depends_on = [
+    module.governance_regional
+  ]
   cloud_provider    = "azure"
   environment       = var.environment
   subscription_name = var.subscription_name
