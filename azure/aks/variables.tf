@@ -163,6 +163,12 @@ variable "node_ttl_enabled" {
   default     = false
 }
 
+variable "linkerd_enabled" {
+  description = "Should linkerd be enabled"
+  type        = bool
+  default     = false
+}
+
 variable "control_plane_logs_enabled" {
   description = "Should Control plan be enabled"
   type        = bool

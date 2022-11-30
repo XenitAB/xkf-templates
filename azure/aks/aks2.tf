@@ -144,4 +144,5 @@ module "aks2_core" {
   }
 
   node_ttl_enabled = var.node_ttl_enabled
+  linkerd_enabled  = var.linkerd_enabled
 }
