@@ -139,6 +139,12 @@ variable "ingress_config" {
   }
 }
 
+variable "prometheus_enabled" {
+  description = "Should prometheus be enabled"
+  type        = bool
+  default     = true
+}
+
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
@@ -177,6 +183,12 @@ variable "control_plane_logs_enabled" {
 
 variable "kubernetes_network_policy_default_deny" {
   description = "If network policies should by default deny cross namespace traffic"
+  type        = bool
+  default     = true
+}
+
+variable "promtail_enabled" {
+  description = "Should promtail be enabled"
   type        = bool
   default     = true
 }

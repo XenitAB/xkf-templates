@@ -107,7 +107,7 @@ module "aks1_core" {
 
   node_local_dns_enabled = true
 
-  prometheus_enabled = true
+  prometheus_enabled = var.prometheus_enabled
   prometheus_config = {
     tenant_id                       = var.tenant_id
     remote_write_authenticated      = var.prometheus_config.remote_write_authenticated
@@ -120,7 +120,7 @@ module "aks1_core" {
     identity                        = module.aks_regional.xenit.identity
   }
 
-  promtail_enabled = true
+  promtail_enabled = promtail_enabled
   promtail_config = {
     loki_address         = "https://logging.prod.unbox.xenit.io/loki/api/v1/push"
     azure_key_vault_name = module.aks_regional.xenit.azure_key_vault_name
