@@ -90,7 +90,7 @@ module "eks1_core" {
     azure_ad_app          = module.eks_global.azad_kube_proxy.azure_ad_app
   }
 
-  falco_enabled = true
+  falco_enabled      = true
   prometheus_enabled = var.prometheus_enabled
   prometheus_config = {
     role_arn                        = module.eks1.prometheus_config.role_arn
