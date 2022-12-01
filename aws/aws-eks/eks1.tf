@@ -92,7 +92,7 @@ module "eks1_core" {
 
   falco_enabled = true
 
-  prometheus_enabled = true
+  prometheus_enabled = var.prometheus_enabled
   prometheus_config = {
     role_arn                        = module.eks1.prometheus_config.role_arn
     tenant_id                       = var.tenant_id
@@ -110,7 +110,7 @@ module "eks1_core" {
   starboard_config  = module.eks1.starboard_config
   starboard_enabled = true
 
-  promtail_enabled = true
+  promtail_enabled = var.promtail_enabled
   promtail_config = {
     role_arn            = module.eks1.promtail_config.role_arn
     loki_address        = "https://logging.prod.unbox.xenit.io/loki/api/v1/push"

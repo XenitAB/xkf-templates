@@ -123,6 +123,12 @@ variable "ingress_config" {
   }
 }
 
+variable "prometheus_enabled" {
+  description = "Should prometheus be enabled"
+  type        = bool
+  default     = true
+}
+
 variable "prometheus_config" {
   description = "Configuration for prometheus"
   type = object({
@@ -139,4 +145,10 @@ variable "prometheus_config" {
     resource_selector          = ["platform"]
     volume_claim_size          = "5Gi"
   }
+}
+
+variable "promtail_enabled" {
+  description = "Should promtail be enabled"
+  type        = bool
+  default     = true
 }
