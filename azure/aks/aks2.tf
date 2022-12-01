@@ -120,7 +120,7 @@ module "aks2_core" {
     identity                        = module.aks_regional.xenit.identity
   }
 
-  promtail_enabled = promtail_enabled
+  promtail_enabled = var.promtail_enabled
   promtail_config = {
     loki_address         = "https://logging.prod.unbox.xenit.io/loki/api/v1/push"
     azure_key_vault_name = module.aks_regional.xenit.azure_key_vault_name
