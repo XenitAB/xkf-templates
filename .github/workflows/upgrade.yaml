@@ -23,11 +23,18 @@ jobs:
           echo "Upgrading to terraform-modules version $VERSION"
           grep -RIl --include \*.tf 'github.com/xenitab/terraform-modules//modules' ${GITHUB_WORKSPACE} | xargs sed -i "s/ref=.*\"/ref=$VERSION\"/g"
 
+      - name: Generate token
+        uses: tibdex/github-app-token@v1
+        id: generate_token
+        with:
+          app_id: ${{ secrets.GH_ACTION_APP_ID }}
+          private_key: ${{ secrets.GH_ACTION_APP_PRIVATE_KEY }}
+
       - name: Check
         id: check
         env:
           VERSION: ${{ inputs.version }}
-          GH_TOKEN: ${{ secrets.PAT }}
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
           set -x
           NUM_CHANGED=$(git status --porcelain | wc -l)
@@ -49,7 +56,7 @@ jobs:
       - name: Create PR
         if: steps.check.outputs.pr_branch != ''
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           PR_BRANCH: ${{ steps.check.outputs.pr_branch }}
           VERSION: ${{ inputs.version }}
         run: |
