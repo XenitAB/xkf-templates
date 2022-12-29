@@ -75,7 +75,7 @@ jobs:
           git checkout -b "$PR_BRANCH"
           git add .
           git status
-          git commit -m "Upgrade to terraform-modules version VERSION"
+          git commit -m "Upgrade to terraform-modules version $VERSION"
           git push origin "$PR_BRANCH"
           echo "Creating PR for branch: $PR_BRANCH"
           gh pr create --title "Upgrade to terraform-modules $VERSION" --body "https://github.com/XenitAB/terraform-modules"
