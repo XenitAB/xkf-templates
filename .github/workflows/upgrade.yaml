@@ -7,5 +7,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - env:
-          VERSION: ${{ github.event.version }}
+          VERSION: ${{ github.event.client_payload.version }}
         run: echo $VERSION
