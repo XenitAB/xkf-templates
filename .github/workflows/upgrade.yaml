@@ -1,11 +1,74 @@
 name: upgrade
 on:
-  repository_dispatch:
-    types: [upgrade_tf_modules]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "terraform-modules version"
+        required: true
+        type: string
 jobs:
   upgrade:
     runs-on: ubuntu-latest
     steps:
-      - env:
-          VERSION: ${{ github.event.client_payload.version }}
-        run: echo $VERSION
+      - name: Checkout this
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Update version
+        id: update
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -x
+          echo "Upgrading to terraform-modules version $VERSION"
+          grep -RIl --include \*.tf 'github.com/xenitab/terraform-modules//modules' ${GITHUB_WORKSPACE} | xargs sed -i "s/ref=.*\"/ref=$VERSION\"/g"
+
+      - name: Check
+        id: check
+        env:
+          VERSION: ${{ inputs.version }}
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          set -x
+          NUM_CHANGED=$(git status --porcelain | wc -l)
+          if [ $NUM_CHANGED == 0 ]; then
+            echo "No changes, version $VERSION already used"
+            exit 0
+          fi
+          PR_BRANCH="upgrade_terraform_modules_${VERSION//./$'_'}"
+          set +e
+          PR_STATUS="$(gh pr view $PR_BRANCH --json state --jq .state)"
+          if [ $? == 0 ]; then
+            if [ $PR_STATUS == 'OPEN' ]; then
+              echo "Open PR already exist"
+              exit 0
+            fi
+          fi
+          echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
+
+      - name: Create PR
+        if: steps.check.outputs.pr_branch != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+          PR_BRANCH: ${{ steps.check.outputs.pr_branch }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -x
+          set +e
+          git config --global user.email "xks-terraform[bot]@users.noreply.github.com"
+          git config --global user.name "xks-terraform[bot]"
+
+          git ls-remote --exit-code --heads origin "$PR_BRANCH"
+          if [ $? == 0 ]; then
+              echo "Branch $PR_BRANCH alredy exist, please delete it."
+              exit 1
+          fi
+          set -e
+          echo "Checking out branch: $PR_BRANCH"
+          git checkout -b "$PR_BRANCH"
+          git add .
+          git status
+          git commit -m "Upgrade to terraform-modules version VERSION"
+          git push origin "$PR_BRANCH"
+          echo "Creating PR for branch: $PR_BRANCH"
+          gh pr create --title "Upgrade to terraform-modules $VERSION" --body "https://github.com/XenitAB/terraform-modules"
