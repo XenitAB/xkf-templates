@@ -1,0 +1,11 @@
+name: upgrade
+on:
+  repository_dispatch:
+    types: [upgrade_tf_modules]
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          VERSION: ${{ github.event.version }}
+        run: echo $VERSION
