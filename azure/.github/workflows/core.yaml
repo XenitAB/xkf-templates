@@ -1,0 +1,30 @@
+name: terraform_core
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - core/**
+  pull_request:
+    paths:
+      - core/**
+  workflow_dispatch:
+    inputs:
+      OPA_BLAST_RADIUS:
+        description: OPA Blast Radius
+        required: true
+        default: "50"
+
+jobs:
+  terraform:
+    uses: ./.github/workflows/terraform-docker.yaml
+    with:
+      DIR: core
+      # The ENVIRONMENTS variable need to be set in Github (Settings -> Secrets and variables -> Actions -> Variables),
+      # e.g. { "environments": [ {"name":"dev"}, {"name":"qa"}, {"name":"prod"} ]}
+      ENVIRONMENTS: ${{ vars.ENVIRONMENTS }}
+    secrets:
+      AZURE_CREDENTIALS_DEV: ${{ secrets.AZURE_CREDENTIALS_DEV }}
+      AZURE_CREDENTIALS_QA: ${{ secrets.AZURE_CREDENTIALS_QA }}
+      AZURE_CREDENTIALS_PROD: ${{ secrets.AZURE_CREDENTIALS_PROD }}

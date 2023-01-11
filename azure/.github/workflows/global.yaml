@@ -1,0 +1,31 @@
+name: terraform_global
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - global/**
+  pull_request:
+    paths:
+      - global/**
+  workflow_dispatch:
+    inputs:
+      OPA_BLAST_RADIUS:
+        description: OPA Blast Radius
+        required: true
+        default: "50"
+
+jobs:
+  terraform:
+    uses: ./.github/workflows/terraform-docker.yaml
+    with:
+      DIR: global
+      runs-on: '["self-hosted", "linux", "xks"]'
+      # The ENVIRONMENTS variable need to be set in Github (Settings -> Secrets and variables -> Actions -> Variables),
+      # e.g. { "environments": [ {"name":"dev"}, {"name":"qa"}, {"name":"prod"} ]}
+      ENVIRONMENTS: ${{ vars.ENVIRONMENTS }}
+    secrets:
+      AZURE_CREDENTIALS_DEV: ${{ secrets.AZURE_CREDENTIALS_DEV }}
+      AZURE_CREDENTIALS_QA: ${{ secrets.AZURE_CREDENTIALS_QA }}
+      AZURE_CREDENTIALS_PROD: ${{ secrets.AZURE_CREDENTIALS_PROD }}
