@@ -22,6 +22,8 @@ jobs:
     with:
       DIR: aks
       runs-on: '["self-hosted", "linux", "xks"]'
+      # The ENVIRONMENTS variable need to be set in Github (Settings -> Secrets and variables -> Actions -> Variables),
+      # e.g. { "environments": [ {"name":"dev"}, {"name":"qa"}, {"name":"prod"} ]}
       ENVIRONMENTS: ${{ vars.ENVIRONMENTS }}
     secrets:
       AZURE_CREDENTIALS_DEV: ${{ secrets.AZURE_CREDENTIALS_DEV }}
