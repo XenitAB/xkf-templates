@@ -40,11 +40,19 @@ jobs:
           echo "update_check_ok=yes" >> $GITHUB_OUTPUT
           echo "template_version=$TEMPLATE_VERSION" >> $GITHUB_OUTPUT
 
+      - name: Generate token
+        uses: tibdex/github-app-token@v1
+        id: generate_token
+        with:
+          # Secrets from the XKS Terraform Githu App
+          app_id: ${{ secrets.XKS_TERRAFORM_APP_ID }}
+          private_key: ${{ secrets.XKS_TERRAFORM_PRIVATE_KEY }}
+
       - name: Check for existing PR
         id: check_pr
         if: steps.check_update.outputs.update_check_ok == 'yes'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
           set -x
           set +e
@@ -59,7 +67,7 @@ jobs:
               exit 0
             fi
           fi
-          SUFFIX=$(grep SUFFIX=\"tfstate Makefile)
+          SUFFIX=$(grep SUFFIX=\tfstate Makefile)
           echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
           echo "suffix=$SUFFIX" >> $GITHUB_OUTPUT
 
@@ -92,7 +100,7 @@ jobs:
       - name: Create PR
         if: steps.check_pr.outputs.pr_branch != ''
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
           set -x
           set +e
