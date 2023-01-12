@@ -7,11 +7,19 @@ jobs:
   upgrade:
     runs-on: ubuntu-latest
     steps:
+      - name: Generate token
+        uses: tibdex/github-app-token@v1
+        id: generate_token
+        with:
+          app_id: ${{ secrets.XKS_TERRAFORM_APP_ID }}
+          private_key: ${{ secrets.XKS_TERRAFORM_PRIVATE_KEY }}
+
       - name: Checkout this
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           path: this
+          token: ${{ steps.generate_token.outputs.token }}
 
       - name: Checkout template
         uses: actions/checkout@v3
@@ -39,14 +47,6 @@ jobs:
           fi
           echo "update_check_ok=yes" >> $GITHUB_OUTPUT
           echo "template_version=$TEMPLATE_VERSION" >> $GITHUB_OUTPUT
-
-      - name: Generate token
-        uses: tibdex/github-app-token@v1
-        id: generate_token
-        with:
-          # Secrets from the XKS Terraform Githu App
-          app_id: ${{ secrets.XKS_TERRAFORM_APP_ID }}
-          private_key: ${{ secrets.XKS_TERRAFORM_PRIVATE_KEY }}
 
       - name: Check for existing PR
         id: check_pr
