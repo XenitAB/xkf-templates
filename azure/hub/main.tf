@@ -4,7 +4,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.28.0"
+      version = "3.38.0"
     }
     azuread = {
       source  = "hashicorp/azuread"
@@ -28,7 +28,7 @@ locals {
 }
 
 module "hub" {
-  source                = "github.com/xenitab/terraform-modules//modules/azure/hub?ref=2023.01.1"
+  source                = "github.com/xenitab/terraform-modules//modules/azure/hub?ref=2023.01.2"
   environment           = var.environment
   location_short        = var.location_short
   subscription_name     = var.subscription_name
