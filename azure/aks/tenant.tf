@@ -46,4 +46,12 @@ locals {
     namespaces           = [""]
     apm_ignore_resources = []
   }
+
+  ingress_config = {
+    http_snippet              = ""
+    public_private_enabled    = false
+    allow_snippet_annotations = false
+    extra_config              = {}
+    extra_headers             = {}
+  }
 }
