@@ -22,9 +22,10 @@ locals {
   # Configure datadog_config to ship logs and metrics to Datadog
   datadog_enabled = false
   datadog_config = {
-    datadog_site = ""
-    api_key      = ""
-    app_key      = ""
-    namespaces   = [""]
+    datadog_site         = ""
+    api_key              = ""
+    app_key              = ""
+    namespaces           = [""]
+    apm_ignore_resources = []
   }
 }
