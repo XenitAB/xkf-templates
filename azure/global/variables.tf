@@ -62,3 +62,9 @@ variable "unique_suffix" {
   description = "Unique suffix that is used in globally unique resources names"
   type        = string
 }
+
+variable "acr_name_override" {
+  description = "Override the ACR naming convention"
+  type = string
+  default = ""
+}
