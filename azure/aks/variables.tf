@@ -97,7 +97,6 @@ variable "aks_config" {
   })
 }
 
-
 variable "opa_gatekeeper_config" {
   description = "Configuration for OPA Gatekeeper"
   type = object({
@@ -202,4 +201,10 @@ variable "external_dns_hostname" {
 variable "aks_name_suffix" {
   description = "Suffix for the aks name"
   type = "number"
+}
+
+variable opa_gatekeeper_enabled {
+  description = "Should OPA Gatekeeper be enabled"
+  type        = bool
+  default     = true
 }
