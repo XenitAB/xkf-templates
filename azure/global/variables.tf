@@ -65,6 +65,6 @@ variable "unique_suffix" {
 
 variable "acr_name_override" {
   description = "Override the ACR naming convention"
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }

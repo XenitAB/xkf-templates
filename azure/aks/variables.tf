@@ -200,7 +200,7 @@ variable "external_dns_hostname" {
 
 variable "aks_name_suffix" {
   description = "Suffix for the aks name"
-  type = "number"
+  type        = number
 }
 
 variable opa_gatekeeper_enabled {
