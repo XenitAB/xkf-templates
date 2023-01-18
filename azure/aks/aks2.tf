@@ -128,8 +128,7 @@ module "aks2_core" {
     excluded_namespaces  = setsubtract(var.tenant_namespaces[*].name, var.promtail_included_tenant_namespaces)
   }
 
-  opa_gatekeeper_config  = var.opa_gatekeeper_config
-  opa_gatekeeper_enabled = var.opa_gatekeeper_enabled
+  opa_gatekeeper_config = var.opa_gatekeeper_config
 
   grafana_agent_enabled = local.grafana_agent_enabled
   grafana_agent_config  = local.grafana_agent_config
