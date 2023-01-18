@@ -203,7 +203,7 @@ variable "aks_name_suffix" {
   type        = number
 }
 
-variable opa_gatekeeper_enabled {
+variable "opa_gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
   type        = bool
   default     = true
