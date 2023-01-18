@@ -32,7 +32,7 @@ module "aks2" {
   location_short  = var.location_short
   name            = var.aks_name
   core_name       = var.core_name
-  aks_name_suffix = var.aks_name_suffix
+  aks_name_suffix = 2
   unique_suffix   = var.unique_suffix
 
   aks_config                    = var.aks_config
@@ -67,7 +67,7 @@ module "aks2_core" {
   environment                            = var.environment
   location_short                         = var.location_short
   name                                   = var.aks_name
-  aks_name_suffix                        = var.aks_name_suffix
+  aks_name_suffix                        = 2
   global_location_short                  = var.location_short
   subscription_name                      = var.subscription_name
   group_name_prefix                      = var.aks_group_name_prefix

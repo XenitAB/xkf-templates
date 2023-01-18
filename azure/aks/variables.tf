@@ -198,13 +198,14 @@ variable "external_dns_hostname" {
   default     = ""
 }
 
-variable "aks_name_suffix" {
-  description = "Suffix for the aks name"
-  type        = number
-}
-
 variable "opa_gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
   type        = bool
   default     = true
+}
+
+variable "acr_name_override" {
+  description = "Override the ACR naming convention"
+  type        = string
+  default     = ""
 }
