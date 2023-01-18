@@ -198,9 +198,16 @@ variable "external_dns_hostname" {
   default     = ""
 }
 
-variable "aks_name_suffix" {
+variable "aks_name_suffix1" {
   description = "Suffix for the aks name"
   type        = number
+  default     = 1
+}
+
+variable "aks_name_suffix2" {
+  description = "Suffix for the aks name"
+  type        = number
+  default     = 2
 }
 
 variable "opa_gatekeeper_enabled" {

@@ -32,7 +32,7 @@ module "aks2" {
   location_short  = var.location_short
   name            = var.aks_name
   core_name       = var.core_name
-  aks_name_suffix = var.aks_name_suffix
+  aks_name_suffix = var.aks_name_suffix2
   unique_suffix   = var.unique_suffix
 
   aks_config                    = var.aks_config
@@ -67,7 +67,7 @@ module "aks2_core" {
   environment                            = var.environment
   location_short                         = var.location_short
   name                                   = var.aks_name
-  aks_name_suffix                        = var.aks_name_suffix
+  aks_name_suffix                        = var.aks_name_suffix2
   global_location_short                  = var.location_short
   subscription_name                      = var.subscription_name
   group_name_prefix                      = var.aks_group_name_prefix
@@ -128,7 +128,8 @@ module "aks2_core" {
     excluded_namespaces  = setsubtract(var.tenant_namespaces[*].name, var.promtail_included_tenant_namespaces)
   }
 
-  opa_gatekeeper_config = var.opa_gatekeeper_config
+  opa_gatekeeper_config  = var.opa_gatekeeper_config
+  opa_gatekeeper_enabled = var.opa_gatekeeper_enabled
 
   grafana_agent_enabled = local.grafana_agent_enabled
   grafana_agent_config  = local.grafana_agent_config
