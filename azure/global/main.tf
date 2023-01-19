@@ -56,5 +56,6 @@ module "aks_global" {
   aks_managed_identity  = module.xkf_governance_global_data.aad_groups.aks_managed_identity.id
   subscription_name     = var.subscription_name
   aks_group_name_prefix = var.aks_group_name_prefix
+  acr_name_override     = var.acr_name_override
 }
 

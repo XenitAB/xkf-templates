@@ -97,7 +97,6 @@ variable "aks_config" {
   })
 }
 
-
 variable "opa_gatekeeper_config" {
   description = "Configuration for OPA Gatekeeper"
   type = object({
@@ -215,4 +214,22 @@ variable "external_dns_hostname" {
   description = "hostname for ingress-nginx to use for external-dns"
   type        = string
   default     = ""
+}
+
+variable "aks_name_suffix1" {
+  description = "Suffix for the aks name"
+  type        = number
+  default     = 1
+}
+
+variable "aks_name_suffix2" {
+  description = "Suffix for the aks name"
+  type        = number
+  default     = 2
+}
+
+variable "opa_gatekeeper_enabled" {
+  description = "Should OPA Gatekeeper be enabled"
+  type        = bool
+  default     = true
 }
