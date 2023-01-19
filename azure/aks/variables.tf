@@ -215,21 +215,27 @@ variable "external_dns_hostname" {
   type        = string
   default     = ""
 }
-
+# tflint-ignore: terraform_unused_declarations
 variable "aks_name_suffix1" {
   description = "Suffix for the aks name"
   type        = number
   default     = 1
 }
-
+# tflint-ignore: terraform_unused_declarations
 variable "aks_name_suffix2" {
   description = "Suffix for the aks name"
   type        = number
   default     = 2
 }
-
+# tflint-ignore: terraform_unused_declarations
 variable "opa_gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
   type        = bool
   default     = true
+}
+# tflint-ignore: terraform_unused_declarations
+variable "acr_name_override" {
+  description = "Override the ACR naming convention"
+  type        = string
+  default     = ""
 }
