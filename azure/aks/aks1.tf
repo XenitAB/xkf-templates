@@ -100,7 +100,7 @@ module "aks1_core" {
     azure_ad_app = module.aks_regional.azad_kube_proxy.azure_ad_app
   }
 
-  ingress_config = local.ingress_config
+  ingress_config = var.ingress_config
 
   starboard_enabled = true
   starboard_config  = module.aks_regional.trivy_identity
