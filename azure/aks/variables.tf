@@ -161,7 +161,7 @@ variable "prometheus_config" {
     volume_claim_size          = "5Gi"
   }
 }
-
+# tflint-ignore: terraform_unused_declarations
 variable "node_ttl_enabled" {
   description = "Should Node TTL be enabled"
   type        = bool
