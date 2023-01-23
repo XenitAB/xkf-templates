@@ -49,7 +49,7 @@ locals {
 }
 
 module "governance_global" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/governance-global?ref=d481483e4b3fed8ed92c0f00b783c68d88121847"
+  source = "github.com/xenitab/terraform-modules//modules/azure/governance-global?ref=970facaa325b866206cabffd3db9a344e22f5578"
 
   environment                  = var.environment
   subscription_name            = var.azure_subscription_name
@@ -62,7 +62,7 @@ module "governance_global" {
 }
 
 module "governance_regional" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/governance-regional?ref=d481483e4b3fed8ed92c0f00b783c68d88121847"
+  source = "github.com/xenitab/terraform-modules//modules/azure/governance-regional?ref=970facaa325b866206cabffd3db9a344e22f5578"
 
   environment                  = var.environment
   location                     = var.azure_location
@@ -77,7 +77,7 @@ module "governance_regional" {
 }
 
 module "xkf_governance_global" {
-  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global?ref=d481483e4b3fed8ed92c0f00b783c68d88121847"
+  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global?ref=970facaa325b866206cabffd3db9a344e22f5578"
   cloud_provider    = "aws"
   environment       = var.environment
   subscription_name = var.azure_subscription_name
@@ -87,6 +87,6 @@ module "xkf_governance_global" {
       delegate_resource_group = n.delegate_resource_group
     }
   ]
-  azure_ad_group_prefix = var.azure_ad_group_prefix
-  group_name_prefix     = var.aks_group_name_prefix
+  group_name_prefix = var.aks_group_name_prefix
+  azuread_groups    = module.governance_global.azuread_groups
 }
