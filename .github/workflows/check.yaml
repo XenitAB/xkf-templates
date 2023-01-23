@@ -7,7 +7,7 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@master
       - name: Setup TFLint
-        uses: lablabs/setup-tflint@v1.1.0
+        uses: terraform-linters/setup-tflint@v2
         with:
           tflint_version: v0.42.1
       - name: Run lint
@@ -19,7 +19,7 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@master
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.3.0
       - name: Run fmt
@@ -62,7 +62,7 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@master
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.3.0
       - name: Run terraform validate
