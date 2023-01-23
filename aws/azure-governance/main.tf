@@ -87,6 +87,6 @@ module "xkf_governance_global" {
       delegate_resource_group = n.delegate_resource_group
     }
   ]
-  azure_ad_group_prefix = var.azure_ad_group_prefix
-  group_name_prefix     = var.aks_group_name_prefix
+  group_name_prefix = var.aks_group_name_prefix
+  azuread_groups    = module.governance_global.azuread_groups
 }
