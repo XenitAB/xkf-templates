@@ -24,11 +24,6 @@ variable "unique_suffix" {
   type        = string
 }
 
-variable "azure_ad_group_prefix" {
-  description = "Prefix for Azure AD Groupss"
-  type        = string
-}
-
 variable "aks_group_name_prefix" {
   description = "Prefix for AKS Azure AD groups"
   type        = string
