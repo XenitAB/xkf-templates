@@ -30,4 +30,6 @@ module "core" {
   peering_config        = var.peering_config
   azure_ad_group_prefix = var.azure_ad_group_prefix
   unique_suffix         = var.unique_suffix
+  alerts_enabled        = var.alerts_enabled
+  notification_email    = "DG-Team-DevOps@xenit.se"
 }
