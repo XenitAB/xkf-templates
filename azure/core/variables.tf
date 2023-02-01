@@ -67,3 +67,9 @@ variable "peering_config" {
   }))
   default = []
 }
+
+variable "alerts_enabled" {
+  description = "Should alert rules be created by default"
+  type        = bool
+  default     = false
+}

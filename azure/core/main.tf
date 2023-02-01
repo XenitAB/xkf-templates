@@ -20,7 +20,7 @@ provider "azurerm" {
 provider "azuread" {}
 
 module "core" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/core?ref=970facaa325b866206cabffd3db9a344e22f5578"
+  source = "github.com/xenitab/terraform-modules//modules/azure/core?ref=774e9cebb62912238242bf4098cf1a40f823bd7e"
 
   environment           = var.environment
   location_short        = var.location_short
@@ -30,4 +30,6 @@ module "core" {
   peering_config        = var.peering_config
   azure_ad_group_prefix = var.azure_ad_group_prefix
   unique_suffix         = var.unique_suffix
+  alerts_enabled        = var.alerts_enabled
+  notification_email    = "DG-Team-DevOps@xenit.se"
 }
