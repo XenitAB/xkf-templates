@@ -81,8 +81,9 @@ variable "aks_authorized_ips" {
 variable "aks_config" {
   description = "The Azure Kubernetes Service (AKS) configuration"
   type = object({
-    version          = string
-    production_grade = bool
+    version                  = string
+    production_grade         = bool
+    priority_expander_config = optional(map(list(string)))
     node_pools = list(object({
       name           = string
       version        = string
@@ -110,6 +111,9 @@ variable "opa_gatekeeper_config" {
     additional_assigns = list(object({
       name = string
     }))
+    additional_modify_sets = optional(list(object({
+      name = string
+    })), [])
   })
   default = {
     additional_excluded_namespaces = ["prometheus"]

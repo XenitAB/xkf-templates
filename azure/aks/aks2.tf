@@ -64,6 +64,8 @@ module "aks2_core" {
     resource_id = module.aks_regional.azure_metrics_identity.resource_id
   }
 
+  priority_expander_config = var.aks_config.priority_expander_config
+
   environment                            = var.environment
   location_short                         = var.location_short
   name                                   = var.aks_name
