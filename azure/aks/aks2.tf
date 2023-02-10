@@ -26,7 +26,7 @@ provider "kubectl" {
 }
 
 module "aks2" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/aks?ref=2de07c61ce0806fad23518627d4bc0128d875b44"
+  source = "github.com/xenitab/terraform-modules//modules/azure/aks?ref=2023.02.1"
 
   environment     = var.environment
   location_short  = var.location_short
@@ -52,7 +52,7 @@ module "aks2" {
 }
 
 module "aks2_core" {
-  source = "github.com/xenitab/terraform-modules//modules/kubernetes/aks-core?ref=2de07c61ce0806fad23518627d4bc0128d875b44"
+  source = "github.com/xenitab/terraform-modules//modules/kubernetes/aks-core?ref=2023.02.1"
   providers = {
     kubernetes = kubernetes.aks2
     helm       = helm.aks2

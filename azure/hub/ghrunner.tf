@@ -1,5 +1,5 @@
 module "ghrunner" {
-  source            = "github.com/xenitab/terraform-modules//modules/azure/github-runner?ref=2de07c61ce0806fad23518627d4bc0128d875b44"
+  source            = "github.com/xenitab/terraform-modules//modules/azure/github-runner?ref=2023.02.1"
   environment       = var.environment
   location_short    = var.location_short
   name              = "ghrunner"
