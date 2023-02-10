@@ -32,7 +32,7 @@ provider "random" {}
 provider "tls" {}
 
 module "xkf_governance_global_data" {
-  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=2de07c61ce0806fad23518627d4bc0128d875b44"
+  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=2023.02.1"
   cloud_provider    = "azure"
   environment       = var.environment
   subscription_name = var.subscription_name
@@ -46,7 +46,7 @@ module "xkf_governance_global_data" {
 }
 
 module "aks_global" {
-  source                = "github.com/xenitab/terraform-modules//modules/azure/aks-global?ref=2de07c61ce0806fad23518627d4bc0128d875b44"
+  source                = "github.com/xenitab/terraform-modules//modules/azure/aks-global?ref=2023.02.1"
   environment           = var.environment
   location              = var.location
   location_short        = var.location_short
