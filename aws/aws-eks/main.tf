@@ -57,7 +57,7 @@ provider "aws" {
 }
 
 module "xkf_governance_global_data" {
-  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=970facaa325b866206cabffd3db9a344e22f5578"
+  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=2de07c61ce0806fad23518627d4bc0128d875b44"
   cloud_provider    = "aws"
   environment       = var.environment
   subscription_name = var.azure_subscription_name
@@ -71,7 +71,7 @@ module "xkf_governance_global_data" {
 }
 
 module "eks_global" {
-  source = "github.com/xenitab/terraform-modules//modules/aws/eks-global?ref=970facaa325b866206cabffd3db9a344e22f5578"
+  source = "github.com/xenitab/terraform-modules//modules/aws/eks-global?ref=2de07c61ce0806fad23518627d4bc0128d875b44"
 
   environment                    = var.environment
   name                           = var.eks_name
