@@ -101,27 +101,20 @@ variable "aks_config" {
 variable "opa_gatekeeper_config" {
   description = "Configuration for OPA Gatekeeper"
   type = object({
-    additional_excluded_namespaces = list(string)
-    enable_default_constraints     = bool
-    additional_constraints = list(object({
+    additional_excluded_namespaces = optional(list(string), ["prometheus"])
+    enable_default_constraints     = optional(bool, true)
+    additional_constraints = optional(list(object({
       excluded_namespaces = list(string)
       processes           = list(string)
-    }))
-    enable_default_assigns = bool
-    additional_assigns = list(object({
+    })), [])
+    enable_default_assigns = optional(bool, true)
+    additional_assigns = optional(list(object({
       name = string
-    }))
+    })), [])
     additional_modify_sets = optional(list(object({
       name = string
     })), [])
   })
-  default = {
-    additional_excluded_namespaces = ["prometheus"]
-    enable_default_constraints     = true
-    additional_constraints         = []
-    enable_default_assigns         = true
-    additional_assigns             = []
-  }
 }
 
 variable "ingress_config" {
