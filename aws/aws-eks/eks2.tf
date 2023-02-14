@@ -23,7 +23,7 @@ provider "kubectl" {
 }
 
 module "eks2" {
-  source = "github.com/xenitab/terraform-modules//modules/aws/eks?ref=2023.02.1"
+  source = "github.com/xenitab/terraform-modules//modules/aws/eks?ref=cab1a42c8bc63b1d2ec7ecdb08899724d9c56ec9"
 
   providers = {
     aws           = aws
@@ -39,11 +39,11 @@ module "eks2" {
   aws_kms_key_arn     = module.eks_global.eks_encryption_key_arn
   velero_config       = module.eks_global.velero_config
   eks_authorized_ips  = var.eks_authorized_ips
-  starboard_enabled   = true
+  trivy_enabled       = true
 }
 
 module "eks2_core" {
-  source = "github.com/xenitab/terraform-modules//modules/kubernetes/eks-core?ref=2023.02.1"
+  source = "github.com/xenitab/terraform-modules//modules/kubernetes/eks-core?ref=cab1a42c8bc63b1d2ec7ecdb08899724d9c56ec9"
 
   providers = {
     kubernetes = kubernetes.eks2
@@ -107,8 +107,8 @@ module "eks2_core" {
   datadog_enabled = local.datadog_enabled
   datadog_config  = local.datadog_config
 
-  starboard_config  = module.eks2.starboard_config
-  starboard_enabled = true
+  trivy_config  = module.eks2.trivy_config
+  trivy_enabled = true
 
   promtail_enabled = var.promtail_enabled
   promtail_config = {
