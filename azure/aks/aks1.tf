@@ -104,8 +104,8 @@ module "aks1_core" {
 
   ingress_config = var.ingress_config
 
-  starboard_enabled = true
-  starboard_config  = module.aks_regional.trivy_identity
+  trivy_enabled = true
+  trivy_config  = module.aks_regional.trivy_identity
 
   node_local_dns_enabled = true
 
