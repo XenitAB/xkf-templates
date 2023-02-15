@@ -162,7 +162,7 @@ variable "prometheus_config" {
 variable "node_ttl_enabled" {
   description = "Should Node TTL be enabled"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "linkerd_enabled" {
