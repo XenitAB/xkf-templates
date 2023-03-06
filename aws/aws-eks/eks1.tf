@@ -43,7 +43,7 @@ module "eks1" {
 }
 
 module "eks1_core" {
-  source = "github.com/xenitab/terraform-modules//modules/kubernetes/eks-core?ref=2023.02.3"
+  source = "github.com/xenitab/terraform-modules//modules/kubernetes/eks-core?ref=22f2fba9ee39ba88cf8b629297e600a57b06738d"
 
   providers = {
     kubernetes = kubernetes.eks1
@@ -77,7 +77,7 @@ module "eks1_core" {
     dns_zone           = var.dns_zones
   }
 
-  ingress_config                         = var.ingress_config
+  ingress_nginx_config                   = var.ingress_nginx_config
   cluster_autoscaler_config              = module.eks1.cluster_autoscaler_config
   opa_gatekeeper_enabled                 = true
   csi_secrets_store_provider_aws_enabled = true

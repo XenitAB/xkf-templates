@@ -52,7 +52,7 @@ module "aks2" {
 }
 
 module "aks2_core" {
-  source = "github.com/xenitab/terraform-modules//modules/kubernetes/aks-core?ref=2023.02.3"
+  source = "github.com/xenitab/terraform-modules//modules/kubernetes/aks-core?ref=22f2fba9ee39ba88cf8b629297e600a57b06738d"
   providers = {
     kubernetes = kubernetes.aks2
     helm       = helm.aks2
@@ -102,7 +102,7 @@ module "aks2_core" {
     azure_ad_app = module.aks_regional.azad_kube_proxy.azure_ad_app
   }
 
-  ingress_config = var.ingress_config
+  ingress_nginx_config = var.ingress_nginx_config
 
   trivy_enabled = true
   trivy_config  = module.aks_regional.trivy_identity
