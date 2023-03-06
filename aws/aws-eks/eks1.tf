@@ -77,7 +77,7 @@ module "eks1_core" {
     dns_zone           = var.dns_zones
   }
 
-  ingress_config                         = var.ingress_config
+  ingress_nginx_config                   = var.ingress_nginx_config
   cluster_autoscaler_config              = module.eks1.cluster_autoscaler_config
   opa_gatekeeper_enabled                 = true
   csi_secrets_store_provider_aws_enabled = true

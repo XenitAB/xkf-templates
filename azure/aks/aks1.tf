@@ -102,7 +102,7 @@ module "aks1_core" {
     azure_ad_app = module.aks_regional.azad_kube_proxy.azure_ad_app
   }
 
-  ingress_config = var.ingress_config
+  ingress_nginx_config = var.ingress_nginx_config
 
   trivy_enabled = true
   trivy_config  = module.aks_regional.trivy_identity

@@ -105,22 +105,30 @@ variable "eks_authorized_ips" {
   type        = list(string)
 }
 
-variable "ingress_config" {
+variable "ingress_nginx_config" {
   description = "Ingress configuration"
   type = object({
-    http_snippet              = string
-    public_private_enabled    = bool
-    allow_snippet_annotations = bool
-    extra_config              = map(string)
-    extra_headers             = map(string)
+    public_private_enabled = optional(bool, false)
+    customization = optional(object({
+      allow_snippet_annotations = optional(bool, false)
+      http_snippet              = optional(string, "")
+      extra_config              = optional(map(string), {})
+      extra_headers             = optional(map(string), {})
+    }), {})
+    customization_public = optional(object({
+      allow_snippet_annotations = optional(bool)
+      http_snippet              = optional(string)
+      extra_config              = optional(map(string))
+      extra_headers             = optional(map(string))
+    }), {})
+    customization_private = optional(object({
+      allow_snippet_annotations = optional(bool)
+      http_snippet              = optional(string)
+      extra_config              = optional(map(string))
+      extra_headers             = optional(map(string))
+    }), {})
   })
-  default = {
-    http_snippet              = ""
-    public_private_enabled    = false
-    allow_snippet_annotations = false
-    extra_config              = {}
-    extra_headers             = {}
-  }
+  default = {}
 }
 
 variable "prometheus_enabled" {
