@@ -8,7 +8,7 @@ terraform {
     }
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.38.0"
+      version = "3.51.0"
     }
   }
 }
@@ -22,7 +22,7 @@ provider "aws" {
 }
 
 module "core" {
-  source                       = "github.com/xenitab/terraform-modules//modules/aws/eks-core?ref=2023.03.2"
+  source                       = "github.com/xenitab/terraform-modules//modules/aws/eks-core?ref=2023.04.1"
   environment                  = var.environment
   name                         = var.core_name
   dns_zone                     = var.dns_zones
