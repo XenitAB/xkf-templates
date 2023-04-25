@@ -40,6 +40,7 @@ module "eks1" {
   velero_config       = module.eks_global.velero_config
   eks_authorized_ips  = var.eks_authorized_ips
   trivy_enabled       = true
+  ebs_volume_size     = var.ebs_volume_size
 }
 
 module "eks1_core" {

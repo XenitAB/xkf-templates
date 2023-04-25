@@ -160,3 +160,8 @@ variable "promtail_enabled" {
   type        = bool
   default     = true
 }
+
+variable "ebs_volume_size" {
+  description = "size of EBS volume for eks node group"
+  type        = string
+}
