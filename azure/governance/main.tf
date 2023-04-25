@@ -20,7 +20,7 @@ provider "azurerm" {
 provider "azuread" {}
 
 module "governance_global" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/governance-global?ref=2023.04.1"
+  source = "github.com/xenitab/terraform-modules//modules/azure/governance-global?ref=2023.04.2"
 
   environment                  = var.environment
   subscription_name            = var.subscription_name
@@ -33,7 +33,7 @@ module "governance_global" {
 }
 
 module "governance_regional" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/governance-regional?ref=2023.04.1"
+  source = "github.com/xenitab/terraform-modules//modules/azure/governance-regional?ref=2023.04.2"
 
   environment                  = var.environment
   location                     = var.location
@@ -48,7 +48,7 @@ module "governance_regional" {
 }
 
 module "xkf_governance_global" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global?ref=2023.04.1"
+  source = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global?ref=2023.04.2"
 
   cloud_provider    = "azure"
   environment       = var.environment

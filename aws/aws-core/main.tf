@@ -22,7 +22,7 @@ provider "aws" {
 }
 
 module "core" {
-  source                       = "github.com/xenitab/terraform-modules//modules/aws/eks-core?ref=2023.04.1"
+  source                       = "github.com/xenitab/terraform-modules//modules/aws/eks-core?ref=2023.04.2"
   environment                  = var.environment
   name                         = var.core_name
   dns_zone                     = var.dns_zones
