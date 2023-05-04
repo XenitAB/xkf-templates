@@ -1,5 +1,5 @@
 module "azpagent" {
-  source            = "github.com/xenitab/terraform-modules//modules/azure/azure-pipelines-agent-vmss?ref=2023.04.2"
+  source            = "github.com/xenitab/terraform-modules//modules/azure/azure-pipelines-agent-vmss?ref=2023.04.3"
   environment       = var.environment
   location_short    = var.azure_location_short
   unique_suffix     = var.unique_suffix

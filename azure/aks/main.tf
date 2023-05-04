@@ -24,7 +24,7 @@ terraform {
     }
     flux = {
       source  = "fluxcd/flux"
-      version = "0.17.0"
+      version = "0.25.3"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
@@ -59,7 +59,7 @@ provider "flux" {}
 
 
 module "xkf_governance_global_data" {
-  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=2023.04.2"
+  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=2023.04.3"
   cloud_provider    = "azure"
   environment       = var.environment
   subscription_name = var.subscription_name
@@ -72,7 +72,7 @@ module "xkf_governance_global_data" {
   group_name_prefix = var.aks_group_name_prefix
 }
 module "aks_regional" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/aks-regional?ref=2023.04.2"
+  source = "github.com/xenitab/terraform-modules//modules/azure/aks-regional?ref=2023.04.3"
 
   environment           = var.environment
   location_short        = var.location_short
