@@ -71,6 +71,14 @@ variable "keyvault_name" {
   default     = ""
 }
 
+# tflint-ignore: terraform_unused_declarations
+variable "hub_name" {
+  description = "The hub name"
+  type        = string
+  default     = "hub"
+}
+
+
 variable "vnet_config" {
   description = "Address spaces used by virtual network."
   type = object({

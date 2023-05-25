@@ -9,7 +9,7 @@ module "ghrunner" {
   vmss_disk_size_gb = 50
   unique_suffix     = var.unique_suffix
   vmss_subnet_config = {
-    name                 = module.hub.subnets["sn-${var.environment}-${var.location_short}-${local.name}-servers"].name
+    name                 = module.hub.subnets["sn-${var.environment}-${var.location_short}-${var.hub_name}-servers"].name
     virtual_network_name = module.hub.virtual_networks.name
     resource_group_name  = module.hub.resource_groups.name
   }

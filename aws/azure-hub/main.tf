@@ -33,7 +33,7 @@ module "hub" {
   location_short        = var.azure_location_short
   subscription_name     = var.azure_subscription_name
   azure_ad_group_prefix = var.azure_ad_group_prefix
-  name                  = local.name
+  name                  = var.hub_name
   vnet_config           = var.vnet_config
   peering_config        = var.peering_config
 }

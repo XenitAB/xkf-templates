@@ -8,5 +8,5 @@ module "azpagent" {
   source_image_id   = var.azpagent_image_id
   vmss_sku          = var.azpagent_vmss_sku
   vmss_disk_size_gb = 64
-  vmss_subnet_id    = module.hub.subnets["sn-${var.environment}-${var.azure_location_short}-${local.name}-servers"].id
+  vmss_subnet_id    = module.hub.subnets["sn-${var.environment}-${var.azure_location_short}-${var.hub_name}-servers"].id
 }
