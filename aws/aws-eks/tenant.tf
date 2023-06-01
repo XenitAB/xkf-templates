@@ -23,9 +23,8 @@ locals {
   datadog_enabled = false
   datadog_config = {
     datadog_site         = ""
-    api_key              = ""
-    app_key              = ""
+    role_arn             = module.eks2.datadog_config.role_arn
     namespaces           = [""]
-    apm_ignore_resources = []
+    apm_ignore_resources = ["''"]
   }
 }
