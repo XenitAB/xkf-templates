@@ -42,6 +42,10 @@ terraform {
       source  = "XenitAB/azuredevops"
       version = "0.5.0"
     }
+    git = {
+      source  = "xenitab/git"
+      version = ">=0.0.2"
+    }
   }
 }
 

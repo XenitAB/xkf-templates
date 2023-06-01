@@ -34,6 +34,10 @@ terraform {
       source  = "integrations/github"
       version = "4.21.0"
     }
+    git = {
+      source  = "xenitab/git"
+      version = ">=0.0.2"
+    }
   }
 }
 

@@ -41,9 +41,9 @@ locals {
   datadog_enabled = false
   datadog_config = {
     datadog_site         = ""
-    api_key              = ""
-    app_key              = ""
     namespaces           = [""]
-    apm_ignore_resources = []
+    apm_ignore_resources = ["''"]
+    azure_key_vault_name = module.aks_regional.datadog.azure_key_vault_name
+    identity             = module.aks_regional.datadog.identity
   }
 }
