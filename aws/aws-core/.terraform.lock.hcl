@@ -22,8 +22,8 @@ provider "registry.terraform.io/hashicorp/aws" {
 }
 
 provider "registry.terraform.io/hashicorp/azurerm" {
-  version     = "3.51.0"
-  constraints = "3.51.0"
+  version     = "3.57.0"
+  constraints = "3.57.0"
   hashes = [
     "h1:X13zyweEi+honSpCdijEJBawbG6m1NmGyWDccICIKXs=",
     "zh:045a56f984882b8cf111301550e14a51346c817ec0b3d6dc752f7533585ed99b",
