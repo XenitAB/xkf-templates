@@ -32,7 +32,7 @@ terraform {
     }
     github = {
       source  = "integrations/github"
-      version = "4.21.0"
+      version = "5.28.0"
     }
     git = {
       source  = "xenitab/git"
@@ -61,7 +61,7 @@ provider "aws" {
 }
 
 module "xkf_governance_global_data" {
-  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=2023.06.3"
+  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=2023.06.4"
   cloud_provider    = "aws"
   environment       = var.environment
   subscription_name = var.azure_subscription_name
@@ -75,7 +75,7 @@ module "xkf_governance_global_data" {
 }
 
 module "eks_global" {
-  source = "github.com/xenitab/terraform-modules//modules/aws/eks-global?ref=2023.06.3"
+  source = "github.com/xenitab/terraform-modules//modules/aws/eks-global?ref=2023.06.4"
 
   environment                    = var.environment
   name                           = var.eks_name
