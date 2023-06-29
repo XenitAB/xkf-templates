@@ -23,7 +23,7 @@ provider "kubectl" {
 }
 
 module "eks1" {
-  source = "github.com/xenitab/terraform-modules//modules/aws/eks?ref=2023.06.4"
+  source = "github.com/xenitab/terraform-modules//modules/aws/eks?ref=2023.06.5"
 
   providers = {
     aws           = aws
@@ -44,7 +44,7 @@ module "eks1" {
 }
 
 module "eks1_core" {
-  source = "github.com/xenitab/terraform-modules//modules/kubernetes/eks-core?ref=2023.06.4"
+  source = "github.com/xenitab/terraform-modules//modules/kubernetes/eks-core?ref=2023.06.5"
 
   providers = {
     kubernetes = kubernetes.eks1
