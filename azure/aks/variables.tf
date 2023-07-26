@@ -98,23 +98,14 @@ variable "aks_config" {
   })
 }
 
-variable "opa_gatekeeper_config" {
+variable "gatekeeper_config" {
   description = "Configuration for OPA Gatekeeper"
   type = object({
-    additional_excluded_namespaces = optional(list(string), ["prometheus"])
-    enable_default_constraints     = optional(bool, true)
-    additional_constraints = optional(list(object({
-      excluded_namespaces = list(string)
-      processes           = list(string)
-    })), [])
-    enable_default_assigns = optional(bool, true)
-    additional_assigns = optional(list(object({
-      name = string
-    })), [])
-    additional_modify_sets = optional(list(object({
-      name = string
-    })), [])
+    exclude_namespaces = list(string)
   })
+  default = {
+    exclude_namespaces = []
+  }
 }
 
 variable "ingress_nginx_config" {
@@ -233,7 +224,7 @@ variable "aks_name_suffix2" {
   default     = 2
 }
 # tflint-ignore: terraform_unused_declarations
-variable "opa_gatekeeper_enabled" {
+variable "gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
   type        = bool
   default     = true

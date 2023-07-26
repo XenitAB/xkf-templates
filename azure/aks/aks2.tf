@@ -26,7 +26,7 @@ provider "kubectl" {
 }
 
 module "aks2" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/aks?ref=2023.06.4"
+  source = "github.com/xenitab/terraform-modules//modules/azure/aks?ref=2023.06.5"
 
   environment     = var.environment
   location_short  = var.location_short
@@ -52,7 +52,7 @@ module "aks2" {
 }
 
 module "aks2_core" {
-  source = "github.com/xenitab/terraform-modules//modules/kubernetes/aks-core?ref=2023.06.4"
+  source = "github.com/xenitab/terraform-modules//modules/kubernetes/aks-core?ref=2023.06.5"
   providers = {
     kubernetes = kubernetes.aks2
     helm       = helm.aks2
@@ -130,8 +130,8 @@ module "aks2_core" {
     excluded_namespaces  = setsubtract(var.tenant_namespaces[*].name, var.promtail_included_tenant_namespaces)
   }
 
-  opa_gatekeeper_config  = var.opa_gatekeeper_config
-  opa_gatekeeper_enabled = var.opa_gatekeeper_enabled
+  gatekeeper_config  = var.gatekeeper_config
+  gatekeeper_enabled = var.gatekeeper_enabled
 
   grafana_agent_enabled = local.grafana_agent_enabled
   grafana_agent_config  = local.grafana_agent_config
