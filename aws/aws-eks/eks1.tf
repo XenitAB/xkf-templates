@@ -80,7 +80,7 @@ module "eks1_core" {
 
   ingress_nginx_config                   = var.ingress_nginx_config
   cluster_autoscaler_config              = module.eks1.cluster_autoscaler_config
-  opa_gatekeeper_enabled                 = true
+  gatekeeper_enabled                     = true
   csi_secrets_store_provider_aws_enabled = true
 
   azad_kube_proxy_enabled = true

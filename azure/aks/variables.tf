@@ -98,7 +98,7 @@ variable "aks_config" {
   })
 }
 
-variable "opa_gatekeeper_config" {
+variable "gatekeeper_config" {
   description = "Configuration for OPA Gatekeeper"
   type = object({
     additional_excluded_namespaces = optional(list(string), ["prometheus"])
@@ -233,7 +233,7 @@ variable "aks_name_suffix2" {
   default     = 2
 }
 # tflint-ignore: terraform_unused_declarations
-variable "opa_gatekeeper_enabled" {
+variable "gatekeeper_enabled" {
   description = "Should OPA Gatekeeper be enabled"
   type        = bool
   default     = true
