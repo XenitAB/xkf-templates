@@ -43,6 +43,30 @@ variable "ghrunner_vmss_sku" {
   default     = "Standard_F4s_v2"
 }
 
+variable "ghrunner_vmss_zones" {
+  description = "The zones to place the VMSS instances"
+  type        = list(string)
+  default     = ["1", "2", "3"]
+}
+
+variable "ghrunner_vmss_instances" {
+  description = "The number of instances"
+  type        = number
+  default     = 1
+}
+
+variable "ghrunner_vmss_disk_size_gb" {
+  description = "The disk size (in GB) for the VMSS instances"
+  type        = number
+  default     = 128
+}
+
+variable "ghrunner_vmss_diff_disk_placement" {
+  description = "Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created."
+  type        = string
+  default     = "CacheDisk"
+}
+
 # tflint-ignore: terraform_unused_declarations
 variable "azpagent_image_id" {
   description = "The image to use for the Azure Devops agent pools"
