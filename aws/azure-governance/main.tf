@@ -49,7 +49,7 @@ locals {
 }
 
 module "governance_global" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/governance-global?ref=2023.06.5"
+  source = "github.com/xenitab/terraform-modules//modules/azure/governance-global?ref=2023.08.1"
 
   environment                  = var.environment
   subscription_name            = var.azure_subscription_name
@@ -62,7 +62,7 @@ module "governance_global" {
 }
 
 module "governance_regional" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/governance-regional?ref=2023.06.5"
+  source = "github.com/xenitab/terraform-modules//modules/azure/governance-regional?ref=2023.08.1"
 
   environment                  = var.environment
   location                     = var.azure_location
@@ -77,7 +77,7 @@ module "governance_regional" {
 }
 
 module "xkf_governance_global" {
-  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global?ref=2023.06.5"
+  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global?ref=2023.08.1"
   cloud_provider    = "aws"
   environment       = var.environment
   subscription_name = var.azure_subscription_name
