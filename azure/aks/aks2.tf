@@ -36,6 +36,7 @@ module "aks2" {
   unique_suffix   = var.unique_suffix
 
   aks_config                    = var.aks_config
+  aks_default_node_pool_zones   = var.aks_default_node_pool_zones
   aks_public_ip_prefix_id       = module.aks_regional.aks_public_ip_prefix_ids[1]
   aks_authorized_ips            = var.aks_authorized_ips
   ssh_public_key                = module.aks_regional.ssh_public_key

@@ -5,8 +5,9 @@ module "ghrunner" {
   name              = "ghrunner"
   source_image_id   = var.ghrunner_image_id
   vmss_sku          = var.ghrunner_vmss_sku
-  vmss_instances    = 2
-  vmss_disk_size_gb = 50
+  vmss_instances    = var.ghrunner_vmss_instances
+  vmss_disk_size_gb = var.ghrunner_vmss_disk_size_gb
+  vmss_zones        = var.ghrunner_vmss_zones
   unique_suffix     = var.unique_suffix
   vmss_subnet_config = {
     name                 = module.hub.subnets["sn-${var.environment}-${var.location_short}-${local.name}-servers"].name

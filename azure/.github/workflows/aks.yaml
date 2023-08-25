@@ -21,7 +21,7 @@ jobs:
     uses: ./.github/workflows/terraform-docker.yaml
     with:
       DIR: aks
-      runs-on: '["self-hosted", "linux", "xks"]'
+      runs-on: '["self-hosted", "linux", "xks", "X64"]'
       # The ENVIRONMENTS variable need to be set in Github (Settings -> Secrets and variables -> Actions -> Variables),
       # e.g. { "environments": [ {"name":"dev"}, {"name":"qa"}, {"name":"prod"} ]}
       ENVIRONMENTS: ${{ vars.ENVIRONMENTS }}
