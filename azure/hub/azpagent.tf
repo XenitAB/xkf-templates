@@ -7,6 +7,6 @@ module "azpagent" {
   keyvault_name     = var.keyvault_name
   source_image_id   = var.azpagent_image_id
   vmss_sku          = var.azpagent_vmss_sku
-  vmss_disk_size_gb = 64
+  vmss_disk_size_gb = var.azpagent_vmss_disk_size_gb
   vmss_subnet_id    = module.hub.subnets["sn-${var.environment}-${var.location_short}-${local.name}-servers"].id
 }
