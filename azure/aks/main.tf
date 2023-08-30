@@ -4,23 +4,23 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.57.0"
+      version = "3.71.0"
     }
     azuread = {
       source  = "hashicorp/azuread"
-      version = "2.28.1"
+      version = "2.41.0"
     }
     random = {
       source  = "hashicorp/random"
-      version = "3.4.3"
+      version = "3.5.1"
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "4.0.3"
+      version = "4.0.4"
     }
     github = {
       source  = "integrations/github"
-      version = "5.28.0"
+      version = "5.34.0"
     }
     flux = {
       source  = "fluxcd/flux"
@@ -28,7 +28,7 @@ terraform {
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.13.1"
+      version = "2.23.0"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
@@ -36,7 +36,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "2.6.0"
+      version = "2.11.0"
     }
     azuredevops = {
       source  = "XenitAB/azuredevops"
@@ -63,7 +63,7 @@ provider "flux" {}
 
 
 module "xkf_governance_global_data" {
-  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=2023.08.1"
+  source            = "github.com/xenitab/terraform-modules//modules/azure/xkf-governance-global-data?ref=2023.08.2"
   cloud_provider    = "azure"
   environment       = var.environment
   subscription_name = var.subscription_name
@@ -76,7 +76,7 @@ module "xkf_governance_global_data" {
   group_name_prefix = var.aks_group_name_prefix
 }
 module "aks_regional" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/aks-regional?ref=2023.08.1"
+  source = "github.com/xenitab/terraform-modules//modules/azure/aks-regional?ref=2023.08.2"
 
   environment           = var.environment
   location_short        = var.location_short
