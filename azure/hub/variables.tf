@@ -86,6 +86,13 @@ variable "azpagent_vmss_sku" {
 }
 
 # tflint-ignore: terraform_unused_declarations
+variable "azpagent_vmss_disk_size_gb" {
+  description = "The disk size (in GB) for the VMSS instances"
+  type        = number
+  default     = 64
+}
+
+# tflint-ignore: terraform_unused_declarations
 variable "azpagent_name" {
   description = "The commonName to use for the deploy"
   type        = string
