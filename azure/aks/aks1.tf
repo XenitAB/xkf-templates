@@ -75,6 +75,8 @@ module "aks1_core" {
   subscription_name                      = var.subscription_name
   group_name_prefix                      = var.aks_group_name_prefix
   kubernetes_network_policy_default_deny = var.kubernetes_network_policy_default_deny
+  unique_suffix                          = var.unique_suffix
+
 
   aad_groups = module.xkf_governance_global_data.aad_groups
   namespaces = [for n in var.tenant_namespaces :
