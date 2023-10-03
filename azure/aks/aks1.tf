@@ -26,7 +26,7 @@ provider "kubectl" {
 }
 
 module "aks1" {
-  source = "github.com/xenitab/terraform-modules//modules/azure/aks?ref=2023.08.2"
+  source = "github.com/xenitab/terraform-modules//modules/azure/aks?ref=2023.10.1"
 
   environment     = var.environment
   location_short  = var.location_short
@@ -53,7 +53,7 @@ module "aks1" {
 }
 
 module "aks1_core" {
-  source = "github.com/xenitab/terraform-modules//modules/kubernetes/aks-core?ref=2023.08.2"
+  source = "github.com/xenitab/terraform-modules//modules/kubernetes/aks-core?ref=2023.10.1"
   providers = {
     kubernetes = kubernetes.aks1
     helm       = helm.aks1
@@ -75,6 +75,8 @@ module "aks1_core" {
   subscription_name                      = var.subscription_name
   group_name_prefix                      = var.aks_group_name_prefix
   kubernetes_network_policy_default_deny = var.kubernetes_network_policy_default_deny
+  unique_suffix                          = var.unique_suffix
+
 
   aad_groups = module.xkf_governance_global_data.aad_groups
   namespaces = [for n in var.tenant_namespaces :
