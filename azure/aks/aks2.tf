@@ -76,6 +76,7 @@ module "aks2_core" {
   group_name_prefix                      = var.aks_group_name_prefix
   kubernetes_network_policy_default_deny = var.kubernetes_network_policy_default_deny
   unique_suffix                          = var.unique_suffix
+  acr_name_override                      = var.acr_name_override
 
 
   aad_groups = module.xkf_governance_global_data.aad_groups
