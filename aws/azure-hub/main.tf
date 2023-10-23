@@ -28,7 +28,7 @@ locals {
 }
 
 module "hub" {
-  source                = "github.com/xenitab/terraform-modules//modules/azure/hub?ref=2023.10.1"
+  source                = "github.com/xenitab/terraform-modules//modules/azure/hub?ref=2023.10.2"
   environment           = var.environment
   location_short        = var.azure_location_short
   subscription_name     = var.azure_subscription_name
