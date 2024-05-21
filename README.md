@@ -1,5 +1,7 @@
 # xkf-templates
 
+**Deprecation: Xenit is no longer using this repository as a template to create and manage Kubernetes tenant clusters. Therefore, it is no longer actively maintained and has been archived.** 
+
 Terraform template files to be used by XKF instances. An XKF instance is a highly opinionated Kubernetes platform running
 in either Azure (AKS) or AWS (EKS) and is using the Xenit Terraform modules in [terraform-modules](https://github.com/XenitAB/terraform-modules).
 An XKF instance is made up he following major parts:
